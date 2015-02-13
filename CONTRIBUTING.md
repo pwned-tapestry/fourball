@@ -66,7 +66,7 @@
 
   For documentation, 1 person should review the documentation pull request.
 
-1. After your pull request has been merged, remember to update your local development branch before your cut your next feature branch.
+1. After your pull request has been merged, remember to update your local development branch before you cut your next feature branch.
 
   `$ git checkout development`
 
