@@ -1,5 +1,7 @@
 # 4-Ball
 
+An excessively low barrier for a same day 4-ball
+
 ## Team
 
   - __Product Owner__: Wayne Müler [@wainage](https://github.com/wainage)
@@ -31,6 +33,7 @@ View the project roadmap [here](https://github.com/pwned-tapestry/thesis/issues)
 
 1. Ionic/Cordova
 1. React
+1. Mongo/MySQL
 
 ## Development
 
