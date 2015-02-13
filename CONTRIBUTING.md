@@ -27,11 +27,13 @@ or
 
 `$ git pull --rebase upstream development`
 
-_If there is a merge conflict, resolve them by editing the files with conflicts, adding them, and doing a git --rebase continue._
+If there are merge conflicts, resolve them by editing the files with conflicts, adding them, and doing a git --rebase continue.
 
 `$git add `
 
 `$git --rebase continue`
+
+If you need a hand with this, ask Nick.
 
 1. After merge conflicts are resolved, push your feature branch to your fork.
 
