@@ -10,14 +10,17 @@
 
 `$ git remote add upstream https://github.com/pwned-tapestry/thesis`
 
-1. From your local master, checkout a feature_branch to develop on. Name branch after its purpose and work on the branch.
+1. From your local master, checkout a feature_branch to develop on. Name branch after its purpose and add the issue number at the end of its name. Work on that branch.
 
 For example: 
-`$ git co -b feature_api_usernames`
-or
-`$ git co -b bugfix_panel_swipe`
 
-1. Add and commit to your your code to your feature branch.
+`$ git co -b feature_api_usernames#11`
+
+or
+
+`$ git co -b bugfix_panel_swipe#24`
+
+1. Add and commit to your code to your feature branch.
 
 `$git add .`
 
