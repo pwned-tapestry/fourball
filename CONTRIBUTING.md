@@ -20,7 +20,7 @@ or
 
 `$ git co -b bugfix_panel_swipe#24`
 
-1. Add and commit to your your code to your feature branch.
+1. Add and commit to your code to your feature branch.
 
 `$git add .`
 
