@@ -1,80 +1,71 @@
 ##Git Work Flow##
 
-#To Start Working
+For reference 
+![workflowImage](http://i.imgur.com/p0e4tQK.png)
 
-1. Fork the repo, and clone to your machine
+
+#To Start Working follow the above diagram, and replace#
+
+`master`with `development` and `hackreactor:repo` with `pwned-tapestry:thesis`
+
+Here's the step-by-step:
+
+1. Fork the https://github.com/pwned-tapestry/thesis repo.
+
+1. Clone to your local machine.
 
 1. Add upstream remote
 
 `$ git remote add upstream https://github.com/pwned-tapestry/thesis`
 
-1. Checkout the development branch. Pull requests with commits to the master branch will be rejected.
+1. From your local master, checkout a feature_branch to develop on. Name branch after its purpose and work on the branch.
 
-Initially you may have to tell git where your development branch is coming from. It's on your fork: origin/development.
-`$git checkout -b development origin/development`
+For example: 
+`$ git co -b feature_api_usernames`
+or
+`$ git co -b bugfix_panel_swipe`
 
-Hereafter, all you need to do to checkout your development branch is:
-`$ git checkout development`
+1. Add and commit to your your code to your feature branch
 
-1. From your local development branch, checkout a new branch for your feature/bugfix. Name branch after its purpose and work on the branch.
-
-For example:
-`$ git checkout -b bugfix_mobile_swipe`
-`$ git checkout -b feature_api_username`
-
-1. Make commits to your feature branch. Commit early and often.
-
-`$git add `
+`$git add .`
 `$git commit `
 
-1. If the upstream remote development branch merges a pull request while you're working on your feature, you'll have to update your local development branch to have the upstream remote development branch code.
-`
-$ git checkout development
-$ git pull --rebase upstream development
-`
+1. When you're ready to make a pull request, you'll need to make sure that your feature branch has all of the commits that have been made to the upstream development branch while you've been developing.
 
-1. Now that your development branch is up to date with the upstream remote, you'll have to place your current feature branch on top of the new development code.
+`$ git pull --rebase upstream development`
 
-This is where you'll deal with merge conflicts on your local machine. If you follow this workflow, we'll have fewer/no merge conflicts when merging your pull request.
+_If there is a merge conflict, resolve them by editing the files with conflicts, adding them, and doing a git --rebase continue._
 
-`
-$ git checkout feature_api_username
-$ git rebase development
-`
+`$git add `
+`$git --rebase continue`
 
-_If there is a merge conflict, resolve the conflicts and proceed._
+1. After merge conflicts are resolved, push your feature branch to your fork
 
-# ... Resolve any conflicts
-$ git add .
-$ git rebase --continue `
-
-Talk with Nick if this becomes an issue.
-
-1. Now that your local development branch and local feature branch is up-to-date with the upstream remote, push your feature branch to your fork
-
-`$git push origin feature_api_username`
+`#from your feature branch`
+`$git push origin feature_api_usernames`
 
 1. Pull request:
 
-Go to GitHub and open a pull request to from your local/feature to thesis/development.
+Go to your fork and open a pull request from your feature branch to the project development branch
 
 Please reference in the pull request comment the corresponding issue using the [supported keywords](https://help.github.com/articles/closing-issues-via-commit-messages/).
 
 For example: 'This closes #27 and closes #5.'
 
-At the beginning, 2 people from the organization must review a feature pull request.
+This will update the waffle.io
 
-For documentation changes, only 1 quick review is necessary
+In the beginning, 2 people from the organization should review feature pull request.
 
-1. After your pull request has been made, checkout your development branch, 
+For documentation, 1 person should review the documentation pull request.
 
+1. After your pull request has been merged, remember to update your local development branch before your cut your next feature branch.
 
-8.Go to step 4.
-
-#Github Submission
-
+`$ git checkout development`
+`$ git pull upstream development`
+`$ git checkout -b feature_api_locationData`
 
 #References
+For reference 
 ![workflowImage](http://i.imgur.com/p0e4tQK.png)
 
 http://www.thumbtack.com/engineering/linear-git-history/
