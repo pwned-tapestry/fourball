@@ -14,7 +14,9 @@
 
 For example: 
 `$ git co -b feature_api_usernames#11`
+
 or
+
 `$ git co -b bugfix_panel_swipe#24`
 
 1. Add and commit to your your code to your feature branch.
