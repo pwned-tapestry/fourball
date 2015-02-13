@@ -20,6 +20,7 @@ or
 1. Add and commit to your your code to your feature branch.
 
 `$git add .`
+
 `$git commit `
 
 1. When you're ready to make a pull request, you'll need to make sure that your feature branch has all of the commits that have been made to the upstream development branch while you've been developing.
@@ -29,11 +30,13 @@ or
 _If there is a merge conflict, resolve them by editing the files with conflicts, adding them, and doing a git --rebase continue._
 
 `$git add `
+
 `$git --rebase continue`
 
 1. After merge conflicts are resolved, push your feature branch to your fork.
 
 `#from your feature branch`
+
 `$git push origin feature_api_usernames`
 
 1. Pull request:
@@ -53,7 +56,9 @@ For documentation, 1 person should review the documentation pull request.
 1. After your pull request has been merged, remember to update your local development branch before your cut your next feature branch.
 
 `$ git checkout development`
+
 `$ git pull upstream development`
+
 `$ git checkout -b feature_api_locationData`
 
 #References
