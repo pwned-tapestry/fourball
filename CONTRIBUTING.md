@@ -1,20 +1,12 @@
 ##Git Work Flow##
 
-For reference 
-![workflowImage](http://i.imgur.com/p0e4tQK.png)
-
-
-#To Start Working follow the above diagram, and replace#
-
-`master`with `development` and `hackreactor:repo` with `pwned-tapestry:thesis`
-
-Here's the step-by-step:
+#To Start Working
 
 1. Fork the https://github.com/pwned-tapestry/thesis repo.
 
 1. Clone to your local machine.
 
-1. Add upstream remote
+1. Add upstream remote.
 
 `$ git remote add upstream https://github.com/pwned-tapestry/thesis`
 
@@ -25,7 +17,7 @@ For example:
 or
 `$ git co -b bugfix_panel_swipe`
 
-1. Add and commit to your your code to your feature branch
+1. Add and commit to your your code to your feature branch.
 
 `$git add .`
 `$git commit `
@@ -39,20 +31,20 @@ _If there is a merge conflict, resolve them by editing the files with conflicts,
 `$git add `
 `$git --rebase continue`
 
-1. After merge conflicts are resolved, push your feature branch to your fork
+1. After merge conflicts are resolved, push your feature branch to your fork.
 
 `#from your feature branch`
 `$git push origin feature_api_usernames`
 
 1. Pull request:
 
-Go to your fork and open a pull request from your feature branch to the project development branch
+Go to your fork and open a pull request from your feature branch to the project development branch.
 
 Please reference in the pull request comment the corresponding issue using the [supported keywords](https://help.github.com/articles/closing-issues-via-commit-messages/).
 
 For example: 'This closes #27 and closes #5.'
 
-This will update the waffle.io
+This will update the waffle.io.
 
 In the beginning, 2 people from the organization should review feature pull request.
 
@@ -65,7 +57,9 @@ For documentation, 1 person should review the documentation pull request.
 `$ git checkout -b feature_api_locationData`
 
 #References
-For reference 
+For reference:
+Replace `master` with `development` and `hackreactor:repo` with `pwned-tapestry:thesis`
+
 ![workflowImage](http://i.imgur.com/p0e4tQK.png)
 
 http://www.thumbtack.com/engineering/linear-git-history/
