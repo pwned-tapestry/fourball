@@ -10,11 +10,52 @@
         <div id="content"></div>
         <script type="text/jsx">
         //Comment list (step2, suborinate to comment box)
+
+        //Comment... what is a <Comment? Where is it defined?
+        //We have to define it!
+
+        //I see clearly how we are accessing this.props.author
+        //this.props.children seems to be whatever exists inside of the tag
+
+        //Our data blob
+
+        //This is in our global name space
+        var data = [
+            {author: "Pete Hunt", text: "This is one comment"},
+            {author: "Jordan Walke", text: "This is *another* comment"}
+        ];
+
+
+            var Comment = React.createClass({
+                render: function() {
+                    return (
+                        <div className="comment">
+                            <h2 className="commentAuthor">
+                                {this.props.author}
+                            </h2>
+                            {this.props.children}
+                        </div>
+                    );
+                }
+            });
+
+
             var CommentList = React.createClass({
                 render: function(){
+                    var commentNodes = this.props.data.map(function(comment){
+                        return (
+                            <Comment author={comment.author}>
+                                {comment.text}
+                            </Comment>
+                        )
+
+                    })
+
+
+
                     return (
                         <div className="commentList">
-                            Hello, world! I am a CommentList.
+                            {commentNodes}
                         </div>
                     );
                 }
@@ -25,23 +66,27 @@
                 render: function(){
                     return(
                         <div className="commentForm">
-                            Hellow, world! I am a CommentForm
+                            Hellow, world! I am a CommentForm!
                         </div>
 
                     );
                 }
             });
 
+        //Third component
+
+
 
 
             //Comment box(Step1)
             //Pulling modular Classes
+
             var CommentBox = React.createClass({
                 render: function(){
                     return(
                         <div className="commentBox">
                           <h1>Comments</h1>
-                          <CommentList />
+                          <CommentList data={this.props.data}/>
                           <CommentForm />
                         </div>
                     );
@@ -49,7 +94,7 @@
             });
 
             React.render(
-                <CommentBox />,
+                <CommentBox data={data}/>,
                 document.getElementById('content')
             );
 
