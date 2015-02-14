@@ -9,7 +9,53 @@
     <body>
         <div id="content"></div>
         <script type="text/jsx">
-            //
+        //Comment list (step2, suborinate to comment box)
+            var CommentList = React.createClass({
+                render: function(){
+                    return (
+                        <div className="commentList">
+                            Hello, world! I am a CommentList.
+                        </div>
+                    );
+                }
+            });
+
+        //Comment form (step2, suborinate to comment box)
+            var CommentForm = React.createClass({
+                render: function(){
+                    return(
+                        <div className="commentForm">
+                            Hellow, world! I am a CommentForm
+                        </div>
+
+                    );
+                }
+            });
+
+
+
+            //Comment box(Step1)
+            //Pulling modular Classes
+            var CommentBox = React.createClass({
+                render: function(){
+                    return(
+                        <div className="commentBox">
+                          <h1>Comments</h1>
+                          <CommentList />
+                          <CommentForm />
+                        </div>
+                    );
+                }
+            });
+
+            React.render(
+                <CommentBox />,
+                document.getElementById('content')
+            );
+
+
+
+
         </script>
     </body>
 </html>
