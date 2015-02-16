@@ -9,22 +9,6 @@
     <body>
         <div id="content"></div>
         <script type="text/jsx">
-        //Comment list (step2, suborinate to comment box)
-
-        //Comment... what is a <Comment? Where is it defined?
-        //We have to define it!
-
-        //I see clearly how we are accessing this.props.author
-        //this.props.children seems to be whatever exists inside of the tag
-
-        //Our data blob
-
-        //This is in our global name space
-        var data = [
-            {author: "Pete Hunt", text: "This is one comment"},
-            {author: "Jordan Walke", text: "This is *another* comment"}
-        ];
-
 
             var Comment = React.createClass({
                 render: function() {
@@ -50,9 +34,6 @@
                         )
 
                     })
-
-
-
                     return (
                         <div className="commentList">
                             {commentNodes}
@@ -61,40 +42,90 @@
                 }
             });
 
-        //Comment form (step2, suborinate to comment box)
             var CommentForm = React.createClass({
+                handleSubmit: function(e){
+                    e.preventDefault();
+                    var author = this.refs.author.getDOMNode().value.trim();
+                    var text = this.refs.text.getDOMNode().value.trim();
+
+                    if (!text ||  !author) {
+                        return;
+                    }
+                    console.log("handleSubmit Called");
+                    this.props.onCommentSubmit({author: author, text: text});
+                    this.refs.author.getDOMNode().value = '';
+                    this.refs.text.getDOMNode().value = '';
+                },
+
                 render: function(){
                     return(
-                        <div className="commentForm">
-                            Hellow, world! I am a CommentForm!
-                        </div>
+                        <form className="commentForm" onSubmit={this.handleSubmit}>
+                            <input type="text" placeholder="Your name" ref="author"/>
+                            <input type="text" placeholder="Say something..." ref="text"/>
+                            <input type="submit" value="Post" />
+                        </form>
 
                     );
                 }
             });
 
-        //Third component
-
-
-
-
-            //Comment box(Step1)
-            //Pulling modular Classes
-
             var CommentBox = React.createClass({
+
+                loadCommentsFromServer: function() {
+                    $.ajax({
+                        url: this.props.url,
+                        dataType: 'json',
+                        success: function(data){
+                          this.setState({data: data});
+                        }.bind(this), //why bind this?
+                                    //Must be a react thing to set the context of the call back
+                        error: function(xhr, status, err){
+                          console.error(this.props.url, status, err.toString());
+                        }.bind(this)
+                    });
+                },
+
+
+                handleCommentSubmit: function(comment){
+                    console.log("submitted");
+                    $.ajax({
+                        url: this.props.url,
+                        dataType: 'json',
+                        type: 'POST',
+                        data: comment,
+                        success: function(data){
+                            this.setState({data: data})
+                        }.bind(this),
+                        error: function(xhr, status, err){
+                            console.error(this.props.url, status, err.toString())
+                        }.bind(this)
+                    });
+                },
+
+                getInitialState: function(){
+                    return {data: []}
+                },
+
+                componentDidMount: function(){
+                    this.loadCommentsFromServer();
+                    setInterval(this.loadCommentsFromServer, this.props.pollInterval)
+                },
+
                 render: function(){
                     return(
                         <div className="commentBox">
                           <h1>Comments</h1>
-                          <CommentList data={this.props.data}/>
-                          <CommentForm />
+                          <CommentList data={this.state.data}/>
+                          <CommentForm onCommentSubmit={this.handleCommentSubmit} />
                         </div>
                     );
                 }
             });
 
+
             React.render(
-                <CommentBox data={data}/>,
+
+                <CommentBox url="comments.json" pollInterval={2000} />,
                 document.getElementById('content')
             );
 
