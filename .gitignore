@@ -2,3 +2,5 @@ node_modules/
 /mobile/node_modules/
 /server/node_modules/
 /client/node_modules/
+
+.idea
