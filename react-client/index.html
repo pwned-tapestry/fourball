@@ -87,6 +87,14 @@
 
 
                 handleCommentSubmit: function(comment){
+                    //before the ajax request
+                    //lets just render the comment
+                    var comments = this.state.data;
+                    var newComments = comments.concat([comment]);
+                    this.setState({data: newComments});
+
+                    //the ajax request is still made
+                    //So that this gets posted to the database
                     console.log("submitted");
                     $.ajax({
                         url: this.props.url,
