@@ -45,12 +45,28 @@
   `$git --rebase continue`
 
   If you need a hand with this, ask Nick.
+  
+  At this point, your local feature branch should have the entire current upstream project, with your commits played over top of it. This will allow pull requests to be merged automatically.
 
-1. After merge conflicts are resolved, push your feature branch to your fork.
+1. Push your local feature branch to your fork.
+
+  The goal here is to get your local repository to your origin.
 
   `#from your feature branch`
 
   `$git push origin feature_api_usernames`
+  
+  NOTE: Everyone on our team has had an issue at this stage. It's possible, either through mistakes or confusing instructions, that git will tell you that some refs could not be pushed. And it will give you very vague instructions to 'git pull' from your fork. 
+  
+  If you've successfully rebased your local repository from the upstream development branch, then your goal is to get your local repo pushed to your fork exactly as you have it on your local feature branch
+  
+  In this case you do a:
+  
+  `#from your feature branch`
+  
+  `git push --force origin feature_api_usernames`
+  
+  This will overwrite your origin repo with your local repo.
 
 1. Pull request:
 
