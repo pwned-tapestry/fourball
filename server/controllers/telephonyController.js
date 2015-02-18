@@ -1,6 +1,7 @@
 // Twilio Credentials 
-var accountSid = 'AC3c365c4dcab72f00d030ede9555b6d3f'; 
-var authToken = '18e6fd655f4541b9a84245c418df58d6'; 
+var config = require('../config.js');
+var accountSid = config.twilioKeys.accountSid;
+var authToken = config.twilioKeys.authToken;
  
 //require the Twilio module and create a REST client 
 var client = require('twilio')(accountSid, authToken); 
