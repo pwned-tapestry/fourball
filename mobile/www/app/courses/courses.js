@@ -1,4 +1,4 @@
-angular.module('app.courses', [])
+angular.module('app.courses', ['app.courses.details'])
 
 .config(function($stateProvider) {
   $stateProvider

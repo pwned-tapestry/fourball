@@ -1,0 +1,12 @@
+<!--
+  This template loads for the 'tab.course-detail' state (app.js)
+  'course' is a $scope variable created in the CourseCtrl controller (controllers.js)
+  The CourseCtrl pulls data from the Courses service (service.js)
+  The Courses service returns an array of course data
+-->
+<ion-view title="{{course.title}}">
+  <ion-content padding="true">
+    <p>{{ course.description }}</p>
+    <p><a class="button button-small icon ion-arrow-left-b" href="#/tab/courses"> All Courses</a></p>
+  </ion-content>
+</ion-view>

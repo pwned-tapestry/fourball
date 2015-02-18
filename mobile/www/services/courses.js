@@ -17,7 +17,7 @@ angular.module('app.services', [])
     all: function() {
       return courses;
     },
-    get: function(petId) {
+    get: function(courseId) {
       // Simple index lookup
       return courses[courseId];
     }
