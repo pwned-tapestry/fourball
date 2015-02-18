@@ -1,25 +1,30 @@
-angular.module('app.services', [])
+angular.module('app.services', []).factory('CourseService', ['$http', CourseService]);
 
-/**
- * A simple example service that returns some data.
- */
-.factory('CourseService', function() {
-  // Might use a resource here that returns a JSON array
+function CourseService($http) {
+  this._courses = [];
 
-  // Some fake testing data
-  var courses = [
-    { id: 0, title: 'Augusta', description: 'The best in the country.', url: 'http://www.kauaigolfclubrentals.com/wp-content/uploads/2011/09/kiahuna-golf-course-kauai.jpg' },
-    { id: 1, title: 'Pebble Beach', description: 'The best in the west.', url: 'http://www.clubcorp.com/var/ezflow_site/storage/images/media/clubs/teal-bend-media-folder/images/facilities/golf-course/tealbendgolfclub-hole16-960x410.jpg/3836500-1-eng-US/TealBendGolfClub-Hole16-960x410.jpg_rotatingGalleryFront.jpg' },
-    { id: 2, title: 'City Course', description: 'Everyone likes it.', url: 'http://www.glengolfdesign.com/docs/golf-course-green.jpg' }
-  ];
+  function getCoursesWithTeeTimes(callback) {
+    var that = this;
+    $http.get("http://localhost:8080/api/coursesWithTeeTimes")
+      .success(function(courses, status, headers, config) {
+        console.log("Received data via HTTP");
+        that._courses = courses;
+        callback(courses);
+      })
+      .error(function(courses, status, headers, config) {
+        console.log("Error while making HTTP call.");
+      });
+  }
+
+  function get(courseId) {
+
+    return this._courses.filter(function(elem) {
+      return elem._id === courseId;
+    })[0];
+  }
 
   return {
-    all: function() {
-      return courses;
-    },
-    get: function(courseId) {
-      // Simple index lookup
-      return courses[courseId];
-    }
-  }
-});
+      getCoursesWithTeeTimes: getCoursesWithTeeTimes,
+      get: get
+  };
+};
