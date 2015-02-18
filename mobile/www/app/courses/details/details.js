@@ -13,6 +13,16 @@ angular.module('app.courses.details', [])
   });
 })
 
+.directive('backImg', function() {
+  return function(scope, element, attrs) {
+    var url = attrs.backImg;
+    element.css({
+      'background': 'url(' + url + ') no-repeat',
+      'background-size': 'cover'
+    });
+  };
+})
+
 .controller('CourseDetailCtrl', function($scope, $stateParams, CourseService) {
   $scope.course = CourseService.get($stateParams.courseId);
 });

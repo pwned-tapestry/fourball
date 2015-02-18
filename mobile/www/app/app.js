@@ -23,7 +23,7 @@ angular.module('app', [
     templateUrl: 'app/app.html'
   });
 
-  $urlRouterProvider.otherwise('/tab/home');
+  $urlRouterProvider.otherwise('/tab/courses');
 
 })
 
