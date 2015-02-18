@@ -18,7 +18,7 @@ angular.module('app.courses', [])
     var url = attrs.backImg;
     var content = element.find('a');
     content.css({
-      'background': 'url(' + url + ')'
+      'background': 'url(' + url + ') no-repeat'
     });
   };
 })
