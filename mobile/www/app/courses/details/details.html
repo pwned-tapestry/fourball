@@ -4,9 +4,10 @@
   The CourseCtrl pulls data from the Courses service (service.js)
   The Courses service returns an array of course data
 -->
-<ion-view title="{{course.title}}">
+<ion-view title="{{course.name}}">
   <ion-content back-img="{{course.url}}" padding="true">
+    <h3>{{course.name}}</h3>
     <p>{{ course.description }}</p>
-    <p><a class="button button-small icon ion-arrow-left-b" href="#/tab/courses"> All Courses</a></p>
+    <p>{{course.address}}</p>
   </ion-content>
 </ion-view>
