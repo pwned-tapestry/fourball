@@ -23,6 +23,8 @@ angular.module('app.courses', ['app.courses.details'])
   };
 })
 
-.controller('CourseIndexCtrl', function($scope, CourseService) {
-  $scope.courses = CourseService.all();
+.controller('CourseIndexCtrl', function ($scope, CourseService) {
+  CourseService.getCoursesWithTeeTimes(function(courses){
+    $scope.courses = courses;
+  });
 });
