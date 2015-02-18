@@ -6,6 +6,7 @@
 var express = require('express');
 var scheduleRouter = express.Router();
 var scheduleController = require('../controllers/scheduleController');
+var telephonyController = require('../controllers/telephonyController');
 
 scheduleRouter
   .get('/', function(request, response){
@@ -44,8 +45,19 @@ scheduleRouter
       }
       response.json(schedule);
     });
+  })
+  .post('/bookTeeTime', function(request,response){
+    var data = {
+      teetime: "", //request.body.stuff,
+      phoneNumber: "+16178752900" //wayne
+    };
+// Wayne: 
+    //scheduleController.bookTeeTime();
+    console.log("telephony-Sending...");
+    telephonyController.sendMessage(data.phoneNumber);
+    console.log("telephony-Sent");
+    response.send("Booking confirmed.");
   });
-
 
 
 module.exports = scheduleRouter;

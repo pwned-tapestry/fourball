@@ -106,20 +106,13 @@ var hasTeeTime = function(data, callback) {
 // user = userId
 // [closest] = boolean (option) - find closest match - default TRUE
 var bookTeeTime = function(data, callback) {
-  data.closest = data.closest || true;
-
-  Schedule.findOne({ courseId: data.courseId, date: data.date }, function(error, schedule) {
+  //cid, time, date, userID
+  Schedule.update({ courseId: data.courseId, date: data.date, time: data.time}, function(error, schedule) {
     if (error) {
       return callback && callback(error, null);
     }
-
-
-
   });
-
 };
-
-
 
 module.exports = {
   addSchedule: addSchedule,
