@@ -100,23 +100,52 @@ var hasTeeTime = function(data, callback) {
   });
 };
 
-// id = courseId
-// date = 'MMDDYYYY' style date
-// time = 'HHMM' time to book
-// user = userId
-// [closest] = boolean (option) - find closest match - default TRUE
+// userId
+// teetimeId
 var bookTeeTime = function(data, callback) {
-  //cid, time, date, userID
-  Schedule.update({ courseId: data.courseId, date: data.date, time: data.time}, function(error, schedule) {
+  console.log(data);
+  Schedule.findOne({ "teetimes._id": data.teetimeId }, function(error, schedule){
     if (error) {
       return callback && callback(error, null);
     }
-  });
+    if (schedule == null) {
+      return callback && callback("Tee time not available", null);
+    }
+
+    for (var i = 0; i < schedule.teetimes.length; i++) {
+      if (schedule.teetimes[i]._id.toString() === data.teetimeId) {
+        schedule.teetimes[i].user = data.userId;
+        schedule.save(function(error, data){
+          if (error) {
+            console.log(error);
+            return callback && callback(error, null);
+          }
+          //console.log("Tee time saved", data);
+
+          return callback && callback(null, data);
+
+        });
+      }
+    }
+
+    // hahahahahahaha -- did u feel the async burn?
+    // vvvvvvvvvvvvvv - bad dog!
+    //return callback && callback('Could not update tee time.', null);
+
+
+});
+
+  //Schedule.update({ courseId: data.courseId, date: data.date, time: data.time}, function(error, schedule) {
+  //  if (error) {
+  //    return callback && callback(error, null);
+  //  }
+  //});
 };
 
 module.exports = {
   addSchedule: addSchedule,
   findSchedule: findSchedule,
   findSchedules: findSchedules,
-  hasTeeTime: hasTeeTime
+  hasTeeTime: hasTeeTime,
+  bookTeeTime: bookTeeTime
 };
