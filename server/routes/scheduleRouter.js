@@ -48,6 +48,10 @@ scheduleRouter
   })
   .post('/bookTeeTime', function(request,response){
     telephonyController.sendMessage(request.body);
+
+    //courseController.update(
+    //  schedule[]
+    //)
     response.send("Booking confirmed.");
   });
 

@@ -19,7 +19,11 @@ telephony.sendMessage = function(data){
     from: fromNum, 
     body: msgContent,   
   }, function(err, message) { 
-    console.log(message.sid); 
+    if(err){
+      console.log(err);
+    }else{
+      console.log(message.sid); 
+    }
   });
 }
 
