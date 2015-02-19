@@ -8,18 +8,17 @@ var client = require('twilio')(accountSid, authToken);
 var fromNum = "+16619276630";
 var telephony = {};
 
-telephony.sendMessage = function(toNum){
-  console.log('fromNum : ', fromNum);
-  console.log('toNum : ', toNum);
+telephony.sendMessage = function(data){
+  console.log('fromNum : ', data.userName);
+  console.log('toNum : ', data.userNumber);
   
   client.messages.create({ 
-    to: toNum, 
+    to: '+1'+data.userNumber, 
     from: fromNum, 
-    body: "You are booked for *Party_Size* at *Course Name*, at *Time*.",   
+    body: "Hello "+ data.userName +"! You are booked for *Party_Size* at *Course Name*, at *Time*.",   
   }, function(err, message) { 
     console.log(message.sid); 
   });
 }
-
 
 module.exports = telephony;

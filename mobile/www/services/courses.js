@@ -1,4 +1,6 @@
-angular.module('app.services', []).factory('CourseService', ['$http', CourseService]);
+angular.module('app.services', [])
+
+.factory('CourseService', ['$http', CourseService]);
 
 function CourseService($http) {
   this._courses = [];
@@ -26,8 +28,22 @@ function CourseService($http) {
     })[0];
   }
 
+  function bookTime(userInfo) {
+    console.log("sending userInfo :", userInfo);
+    console.log("http...", $http);
+
+    $http.post("localhost:8080/api/schedule/bookTeeTime", userInfo)
+      .success(function(data, status){
+        console.log("success", data);
+      })
+      .error(function(data, status){
+        console.log("failure :", data);
+      });
+  } 
+
   return {
       getCoursesWithTeeTimes: getCoursesWithTeeTimes,
-      get: get
+      get: get,
+      bookTime: bookTime
   };
 };
