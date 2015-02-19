@@ -57,20 +57,24 @@ var CommentForm = React.createClass({
   }
 });
 
-
+//api/course/
+//
+//
 
 var CommentBox = React.createClass({
 
   loadCommentsFromServer: function() {
     $.ajax({
-      url: this.props.url,
+      url: "localhost:8080/api/course/",
       dataType: 'json',
       success: function(data){
+        console.log(data)
+
         this.setState({data: data});
       }.bind(this), //why bind this?
       //Must be a react thing to set the context of the callback
       error: function(xhr, status, err){
-        console.error(this.props.url, status, err.toString());
+        console.error("localhost:8080/api/course/", status, err.toString());
       }.bind(this)
     });
   },
