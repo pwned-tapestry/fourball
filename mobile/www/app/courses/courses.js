@@ -1,4 +1,4 @@
-angular.module('app.courses', [])
+angular.module('app.courses', ['app.courses.details'])
 
 .config(function($stateProvider) {
   $stateProvider
@@ -18,11 +18,13 @@ angular.module('app.courses', [])
     var url = attrs.backImg;
     var content = element.find('a');
     content.css({
-      'background': 'url(' + url + ')'
+      'background': 'url(' + url + ') no-repeat'
     });
   };
 })
 
-.controller('CourseIndexCtrl', function($scope, CourseService) {
-  $scope.courses = CourseService.all();
+.controller('CourseIndexCtrl', function ($scope, CourseService) {
+  CourseService.getCoursesWithTeeTimes(function(courses){
+    $scope.courses = courses;
+  });
 });
