@@ -32,7 +32,7 @@ function CourseService($http) {
     console.log("sending userInfo :", userInfo);
     console.log("http...", $http);
 
-    $http.post("localhost:8080/api/schedule/bookTeeTime", userInfo)
+    $http.post("http://localhost:8080/api/schedule/bookTeeTime", userInfo)
       .success(function(data, status){
         console.log("success", data);
       })
