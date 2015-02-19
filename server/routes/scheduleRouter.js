@@ -15,21 +15,32 @@ scheduleRouter
       response.json(schedules);
     });
   })
-  // send body.courseId and body.date
+  .post('/search', function(request, response){
+    scheduleController.findSchedules(request.body, function(error, schedules){
+      if (error) {
+        return response.status(400).end(error);
+      }
+      return response.json(schedules);
+    })
+  })
+  // send body.courseId and body.date with body.start, body.end, body.interval
   .post('/', function(request, response){
     scheduleController.addSchedule(request.body, function(error, schedule){
       if (error) {
-        return response.end(error);
+        return response.status(500).end(error);
       }
-      response.json(schedule);
+      response.status(200).json(schedule);
     });
   })
   .get('/:id/:date', function(request, response){
     scheduleController.findSchedule({ courseId: request.params.id, date: request.params.date }, function(error, schedule){
       if (error) {
-        return response.end(error);
+        return response.status(500).end(error);
       }
-      response.json(schedule);
+      if (schedule == null) {
+        return response.status(404).end('Schedule not found.')
+      }
+      response.status(200).json(schedule);
     });
   })
   .get('/:id/:date/:start/:end', function(request, response){
@@ -41,9 +52,12 @@ scheduleRouter
     };
     scheduleController.hasTeeTime(data, function(error, schedule){
       if (error) {
-        return response.end(error);
+        return response.status(500).end(error);
       }
-      response.json(schedule);
+      if (schedule == null) {
+        return response.status(404).end('Schedule not found.')
+      }
+      response.status(200).json(schedule);
     });
   })
   .post('/bookTeeTime', function(request,response){

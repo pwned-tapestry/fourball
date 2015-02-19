@@ -1,0 +1,27 @@
+2015-02-18 19:17:57.500 fourBall[17182:455310] DiskCookieStorage changing policy from 2 to 0, cookie file: file:///Users/wayne/Library/Developer/CoreSimulator/Devices/0C19B882-C8CD-4BD5-A1B1-420AB227EC0F/data/Containers/Data/Application/1F379829-96D0-4D97-8D16-715481D9AC44/Library/Cookies/Cookies.binarycookies
+2015-02-18 19:17:57.822 fourBall[17182:455310] Apache Cordova native platform version 3.7.0 is starting.
+2015-02-18 19:17:57.823 fourBall[17182:455310] Multi-tasking -> Device: YES, App: YES
+2015-02-18 19:17:57.838 fourBall[17182:455310] Unlimited access to network resources
+2015-02-18 19:17:58.330 fourBall[17182:455310] [CDVTimer][keyboard] 0.061035ms
+2015-02-18 19:17:58.330 fourBall[17182:455310] [CDVTimer][TotalPluginStartup] 0.220001ms
+2015-02-18 19:17:59.215 fourBall[17182:455310] Resetting plugins due to page load.
+2015-02-18 19:17:59.484 fourBall[17182:455310] Finished load of: file:///Users/wayne/Library/Developer/CoreSimulator/Devices/0C19B882-C8CD-4BD5-A1B1-420AB227EC0F/data/Containers/Bundle/Application/A092180F-AB5D-479B-BA8F-2BC202E18234/fourBall.app/www/index.html#/tab/home
+2015-02-18 19:18:50.282 fourBall[17182:455310] Error while making HTTP call.
+2015-02-18 19:20:05.612 fourBall[17386:458546] DiskCookieStorage changing policy from 2 to 0, cookie file: file:///Users/wayne/Library/Developer/CoreSimulator/Devices/0C19B882-C8CD-4BD5-A1B1-420AB227EC0F/data/Containers/Data/Application/F9C794D4-5C82-41DA-9933-102E8A84C26B/Library/Cookies/Cookies.binarycookies
+2015-02-18 19:20:05.680 fourBall[17386:458546] Apache Cordova native platform version 3.7.0 is starting.
+2015-02-18 19:20:05.680 fourBall[17386:458546] Multi-tasking -> Device: YES, App: YES
+2015-02-18 19:20:05.681 fourBall[17386:458546] Unlimited access to network resources
+2015-02-18 19:20:05.844 fourBall[17386:458546] [CDVTimer][keyboard] 0.055015ms
+2015-02-18 19:20:05.844 fourBall[17386:458546] [CDVTimer][TotalPluginStartup] 0.207961ms
+2015-02-18 19:20:05.910 fourBall[17386:458546] Resetting plugins due to page load.
+2015-02-18 19:20:06.067 fourBall[17386:458546] Finished load of: file:///Users/wayne/Library/Developer/CoreSimulator/Devices/0C19B882-C8CD-4BD5-A1B1-420AB227EC0F/data/Containers/Bundle/Application/97879B3C-BB7F-4455-9E87-1BFDA99E4410/fourBall.app/www/index.html#/tab/home
+2015-02-18 19:20:07.030 fourBall[17386:458546] Error while making HTTP call.
+2015-02-18 19:25:45.487 fourBall[17537:465866] DiskCookieStorage changing policy from 2 to 0, cookie file: file:///Users/wayne/Library/Developer/CoreSimulator/Devices/0C19B882-C8CD-4BD5-A1B1-420AB227EC0F/data/Containers/Data/Application/A7C6B4B2-6E55-48FC-A387-A68E68DB6D6A/Library/Cookies/Cookies.binarycookies
+2015-02-18 19:25:45.557 fourBall[17537:465866] Apache Cordova native platform version 3.7.0 is starting.
+2015-02-18 19:25:45.557 fourBall[17537:465866] Multi-tasking -> Device: YES, App: YES
+2015-02-18 19:25:45.558 fourBall[17537:465866] Unlimited access to network resources
+2015-02-18 19:25:45.737 fourBall[17537:465866] [CDVTimer][keyboard] 0.066042ms
+2015-02-18 19:25:45.737 fourBall[17537:465866] [CDVTimer][TotalPluginStartup] 0.257969ms
+2015-02-18 19:25:45.830 fourBall[17537:465866] Resetting plugins due to page load.
+2015-02-18 19:25:45.971 fourBall[17537:465866] Finished load of: file:///Users/wayne/Library/Developer/CoreSimulator/Devices/0C19B882-C8CD-4BD5-A1B1-420AB227EC0F/data/Containers/Bundle/Application/3B930436-F336-40BB-BFCB-841931789BA0/fourBall.app/www/index.html#/tab/home
+2015-02-18 19:25:47.520 fourBall[17537:465866] Received data via HTTP

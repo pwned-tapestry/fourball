@@ -47,7 +47,11 @@ coreRouter
         var back = [];
         for (var i = 0; i < results.length; i++) {
           back[i] = courses[i].toObject();
-          back[i].tees = results[i];
+          if (results[i] !== null) {
+            back[i].teetimes = results[i].teetimes;
+          } else {
+            back[i].teetimes = [];
+          }
         }
 
         response.json(back);
