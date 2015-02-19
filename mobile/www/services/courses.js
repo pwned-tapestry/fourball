@@ -1,4 +1,6 @@
-angular.module('app.services', []).factory('CourseService', ['$http', CourseService]);
+angular.module('app.services', [])
+
+.factory('CourseService', ['$http', CourseService]);
 
 function CourseService($http) {
   this._courses = [];
@@ -26,8 +28,53 @@ function CourseService($http) {
     })[0];
   }
 
+  function bookTime(userInfo) {
+    console.log("sending userInfo :", userInfo);
+    console.log("http...", $http);
+
+    //pass bookingInfo:
+    //  date: mmddyyyy -string
+    //  courseId: string
+    //  
+    //  time: xxxx - string
+    //  user: string
+    //  players: string
+    //  _id: string (for booking)
+
+    //post with bookingInfo:
+
+    var newUser = {
+      cell: userInfo.userName,
+      firstName: userInfo.userNumber
+    }
+
+    //create a new user
+    $http.post("http://localhost:8080/api/user", newUser)
+      .then(function(returnedUser){
+        //then send a text, to that user
+        console.log("returnedUser : ", returnedUser);
+        return $http.post("http://localhost:8080/api/schedule/bookTeeTime", userInfo)
+                .then(function(data, status){
+                  console.log('success : ', data);
+                },function(data, status){
+                  console.log('error :', data);
+                });
+      }, function(error){
+        console.log("error :", error);
+      });
+
+    // $http.post("http://localhost:8080/api/schedule/bookTeeTime", userInfo)
+    //   .success(function(data, status){
+    //     console.log("success", data);
+    //   })
+    //   .error(function(data, status){
+    //     console.log("failure :", data);
+    //   });
+  }
+
   return {
       getCoursesWithTeeTimes: getCoursesWithTeeTimes,
-      get: get
+      get: get,
+      bookTime: bookTime
   };
 };

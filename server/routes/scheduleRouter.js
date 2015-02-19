@@ -47,17 +47,12 @@ scheduleRouter
     });
   })
   .post('/bookTeeTime', function(request,response){
-    var data = {
-      teetime: "", //request.body.stuff,
-      phoneNumber: "+16178752900" //wayne
-    };
-// Wayne: 
-    //scheduleController.bookTeeTime();
-    console.log("telephony-Sending...");
-    telephonyController.sendMessage(data.phoneNumber);
-    console.log("telephony-Sent");
+    telephonyController.sendMessage(request.body);
+
+    //courseController.update(
+    //  schedule[]
+    //)
     response.send("Booking confirmed.");
   });
-
 
 module.exports = scheduleRouter;
