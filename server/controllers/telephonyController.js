@@ -9,13 +9,15 @@ var fromNum = "+16619276630";
 var telephony = {};
 
 telephony.sendMessage = function(data){
+  var msgContent = "Hello "+ data.userName +"! You are booked for *Party_Size* at *Course Name*, at *Time*.";
+  console.log('msgContent: ', msgContent);
   console.log('fromNum : ', data.userName);
   console.log('toNum : ', data.userNumber);
   
   client.messages.create({ 
     to: '+1'+data.userNumber, 
     from: fromNum, 
-    body: "Hello "+ data.userName +"! You are booked for *Party_Size* at *Course Name*, at *Time*.",   
+    body: msgContent,   
   }, function(err, message) { 
     console.log(message.sid); 
   });
