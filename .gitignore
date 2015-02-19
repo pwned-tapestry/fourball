@@ -1,6 +1,9 @@
 node_modules/
 
 mobile/node_modules
+mobile/platforms
+mobile/hooks
+
 server/config.js
 server/node_modules
 
