@@ -40,7 +40,7 @@ var nextTime = function(timeIn, timeInc) {
 var addSchedule = function(data, callback) {
 
   // get a schedule for the whole day
-  var teetimes = makeSchedule(data.start, data.end, data.minutes);
+  var teetimes = makeSchedule(data.start, data.end, data.interval);
   // prep data to save
   var scheduleData = {
     courseId: data.courseId,

@@ -16,9 +16,12 @@ userRouter
     userController.findUsers({}, function(error, users){
       if (error) {
         // TODO: pick HTTP status error
-        return response.end(error);
+        return response.status(500).end(error);
       }
-      response.json(users);
+      if (users == null) {
+        return response.status(404).end("User not found.");
+      }
+      response.status(200).json(users);
     });
 
   })
@@ -26,18 +29,21 @@ userRouter
     // TODO: error checking Wayne!
     userController.addUser(request.body, function(error, user){
       if (error) {
-        response.status(400);
-        return response.end(error);
+        return response.status(500).end(error);
       }
-      response.json(user);
+      // HTTP Status 201 - created
+      response.status(201).json(user);
     });
   })
   .get('/:cell', function(request, response){
     userController.findUser({ cell: request.params.cell }, function(error, user){
       if (error) {
-        return response.end(error);
+        return response.status(500).end(error);
       }
-      response.json(user);
+      if (user == null) {
+        return response.status(404).end("User not found.");
+      }
+      response.status(200).json(user);
     });
   })
   // route for Toly
@@ -55,10 +61,23 @@ userRouter
       cell: request.params.cell
     }, request.body, function(error, rows){
       if (error) {
-        return response.end(error);
+        return response.status(500).end(error);
       }
-      response.json(rows);
+      response.status(200).json(rows);
     });
+  })
+  // CATCH-ALL for bad requests
+  .get('*', function(request, response){
+    // HTTP Bad Request 400
+    return response.status(400).end();
+  })
+  .post('*', function(request, response){
+    // HTTP Bad Request 400
+    return response.status(400).end();
+  })
+  .put('*', function(request, response){
+    // HTTP Bad Request 400
+    return response.status(400).end();
   });
 
 
