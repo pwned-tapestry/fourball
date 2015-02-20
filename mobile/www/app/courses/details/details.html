@@ -9,5 +9,9 @@
     <h3>{{course.name}}</h3>
     <p>{{ course.description }}</p>
     <p>{{course.address}}</p>
+    <label class="item item-input datepicker">
+      <span class="input-label">Date</span>
+      <input type="datetime-local" ng-model="datetime" ui-event="{blur: 'getDateTime($event)'}">
+    </label>
   </ion-content>
 </ion-view>

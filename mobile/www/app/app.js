@@ -7,7 +7,7 @@
 
 angular.module('app', [
   'ionic',
-  'ngCordova'
+  'ui.utils',
   'app.services',
   'app.home',
   'app.courses',

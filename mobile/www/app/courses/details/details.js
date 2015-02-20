@@ -25,4 +25,8 @@ angular.module('app.courses.details', [])
 
 .controller('CourseDetailCtrl', function($scope, $stateParams, CourseService) {
   $scope.course = CourseService.get($stateParams.courseId);
+  $scope.datetime;
+  $scope.getDateTime = function(event) {
+    $scope.datetime = event.target.value;
+  }
 });
