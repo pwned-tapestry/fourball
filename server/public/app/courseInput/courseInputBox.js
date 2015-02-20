@@ -36,6 +36,7 @@ var CourseList = React.createClass({
   }
 });
 
+
 var CourseForm = React.createClass({
   handleSubmit: function(e){
     e.preventDefault();
@@ -105,19 +106,13 @@ var CourseBox = React.createClass({
     var newCourse = courses.concat([course]);
     this.setState({data: newCourse});
 
-    //the ajax request is still made
-    //So that this gets posted to the database
-    console.log("this is the submitted course", course);
-    console.log("this is what it looks like stringified", JSON.stringify(course));
-
-
     $.ajax({
-      url: "/api/course/",
+      url: '/api/course/',
       dataType: 'json',
       type: 'POST',
-      data: {"name":"TPC", "address":"SF", "description":"Lake Merrit"},
+      data: JSON.stringify(course),
+      headers: { 'Content-Type': 'application/json' },
       success: function(data){
-        console.log("courseSubmit with data:", data);
         this.setState({data: data})
       }.bind(this),
       error: function(xhr, status, err){
