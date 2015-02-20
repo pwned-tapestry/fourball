@@ -6,6 +6,7 @@ mobile/hooks
 
 server/config.js
 server/node_modules
+server/public/libs
 
 client/node_modules
 
