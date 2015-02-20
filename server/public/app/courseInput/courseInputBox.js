@@ -2,12 +2,14 @@ var Course = React.createClass({
   render: function() {
     return (
       <div className="course">
-      <h2 className="courseAuthor">
+
+      <h2 className="courseName">
       {this.props.name}
       </h2>
 
-      <h2 className="courseAddress">{this.props.address}</h2>
-
+      <h3 className="courseAddress">
+      {this.props.address}
+      </h3>
 
       {this.props.children}
       </div>
@@ -20,10 +22,8 @@ var CourseList = React.createClass({
   render: function(){
     var courseNodes = this.props.data.map(function(course){
       return (
-        <Course name={course.name}>
-
+        <Course name={course.name} address={course.address}>
         {course.description}
-        {course.address}
         </Course>
       );
 
@@ -133,7 +133,7 @@ var CourseBox = React.createClass({
   render: function(){
     return(
       <div className="courseBox">
-      <h1>Open your course for a 4-ball</h1>
+      <h1>Open your course for a 4Ball</h1>
       <CourseList data={this.state.data}/>
       <CourseForm onCourseSubmit={this.handleCourseSubmit} />
       </div>
