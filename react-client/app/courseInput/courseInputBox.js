@@ -1,3 +1,22 @@
+var Course = React.createClass({
+  render: function() {
+    return (
+      <div className="course">
+
+      <h2 className="courseName">
+      {this.props.name}
+      </h2>
+
+      <h3 className="courseAddress">
+      {this.props.address}
+      </h3>
+
+      {this.props.children}
+      </div>
+    );
+  }
+});
+
 var CourseList = React.createClass({
   render: function(){
     var courseNodes = this.props.data.map(function(course){
