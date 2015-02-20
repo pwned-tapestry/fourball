@@ -10,6 +10,17 @@ var scheduleController = require('../controllers/scheduleController');
 
 
 coreRouter
+  .post('/bookteetime', function(request, response){
+    //console.log(request.body);
+    scheduleController.bookTeeTime(request.body, function(error, result){
+      if (error) {
+        console.log("error", error);
+        return response.status(500).end(error);
+      }
+      console.log("Success 201");
+      return response.status(201).json(result);
+    });
+  })
   .get('/coursesWithTeeTimes', function(request, response){
     courseController.findCourses({}, function(error, courses){
       if (error) {

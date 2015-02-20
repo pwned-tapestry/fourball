@@ -10,10 +10,13 @@ var telephony = {};
 
 telephony.sendMessage = function(data){
   var msgContent = "Hello "+ data.userName +"! You are booked for *Party_Size* at *Course Name*, at *Time*.";
-  console.log('msgContent: ', msgContent);
-  console.log('fromNum : ', data.userName);
-  console.log('toNum : ', data.userNumber);
-  
+
+  if (config.environment === 'dev') {
+    console.log('msgContent: ', msgContent);
+    console.log('fromNum : ', data.userName);
+    console.log('toNum : ', data.userNumber);
+  }
+
   client.messages.create({ 
     to: '+1'+data.userNumber, 
     from: fromNum, 
