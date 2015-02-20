@@ -1,56 +1,55 @@
-var Comment = React.createClass({
-  render: function() {
-    return (
-      <div className="comment">
-      <h2 className="commentAuthor">
-      {this.props.author}
-      </h2>
-      {this.props.children}
-      </div>
-    );
-  }
-});
-
-
-var CommentList = React.createClass({
+var CourseList = React.createClass({
   render: function(){
-    var commentNodes = this.props.data.map(function(comment){
+    var courseNodes = this.props.data.map(function(course){
       return (
-        <Comment author={comment.author}>
-        {comment.text}
-        </Comment>
-      )
+        <Course name={course.name} address={course.address}>
+        {course.description}
+        </Course>
+      );
 
-    })
+    });
     return (
-      <div className="commentList">
-      {commentNodes}
+      <div className="courseList">
+      {courseNodes}
       </div>
     );
   }
 });
 
-var CommentForm = React.createClass({
+
+var CourseForm = React.createClass({
   handleSubmit: function(e){
     e.preventDefault();
-    var author = this.refs.author.getDOMNode().value.trim();
-    var text = this.refs.text.getDOMNode().value.trim();
 
-    if (!text ||  !author) {
+    //Create refs for all input data
+    var name = this.refs.name.getDOMNode().value.trim();
+    var address = this.refs.address.getDOMNode().value.trim();
+    var description = this.refs.description.getDOMNode().value.trim();
+
+    //If no data exists, return
+    if (!name ||  !address || !description) {
       return;
     }
+
     console.log("handleSubmit Called");
-    this.props.onCommentSubmit({author: author, text: text});
-    this.refs.author.getDOMNode().value = '';
-    this.refs.text.getDOMNode().value = '';
+
+    //on submit, we send a json object
+    this.props.onCourseSubmit({name: name, address: address, description: description});
+
+    //Set all dom nodes to an empty string
+    this.refs.name.getDOMNode().value = '';
+    this.refs.address.getDOMNode().value = '';
+    this.refs.description.getDOMNode().value = '';
+
   },
 
   render: function(){
     return(
-      <form className="commentForm" onSubmit={this.handleSubmit}>
-      <input type="text" placeholder="Course name" ref="author"/>
-      <input type="text" placeholder="Offered tee time (in 24hour time ex 0947)" ref="text"/>
-      <input type="submit" value="Offer time" />
+      <form className="courseForm" onSubmit={this.handleSubmit}>
+      <input type="text" placeholder="Course name" ref="name"/>
+      <input type="text" placeholder="Location (City, ST)" ref="address"/>
+      <input type="text" placeholder="Description" ref="description"/>
+      <input type="submit" value="Create new course" />
       </form>
 
     );
@@ -61,11 +60,11 @@ var CommentForm = React.createClass({
 //
 //
 
-var CommentBox = React.createClass({
+var CourseBox = React.createClass({
 
-  loadCommentsFromServer: function() {
+  loadCoursesFromServer: function() {
     $.ajax({
-      url: "localhost:8080/api/course/",
+      url: "/api/course/",
       dataType: 'json',
       success: function(data){
         console.log(data)
@@ -80,26 +79,24 @@ var CommentBox = React.createClass({
   },
 
 
-  handleCommentSubmit: function(comment){
+  handleCourseSubmit: function(course){
     //before the ajax request
-    //lets just render the comment
-    var comments = this.state.data;
-    var newComments = comments.concat([comment]);
-    this.setState({data: newComments});
+    //lets just render the course
+    var courses = this.state.data;
+    var newCourse = courses.concat([course]);
+    this.setState({data: newCourse});
 
-    //the ajax request is still made
-    //So that this gets posted to the database
-    console.log("submitted");
     $.ajax({
-      url: this.props.url,
+      url: '/api/course/',
       dataType: 'json',
       type: 'POST',
-      data: comment,
+      data: JSON.stringify(course),
+      headers: { 'Content-Type': 'application/json' },
       success: function(data){
         this.setState({data: data})
       }.bind(this),
       error: function(xhr, status, err){
-        console.error(this.props.url, status, err.toString())
+        console.error("localhost:8080/api/course/", status, err.toString())
       }.bind(this)
     });
   },
@@ -109,16 +106,16 @@ var CommentBox = React.createClass({
   },
 
   componentDidMount: function(){
-    this.loadCommentsFromServer();
-    setInterval(this.loadCommentsFromServer, this.props.pollInterval)
+    this.loadCoursesFromServer();
+    setInterval(this.loadCoursesFromServer, this.props.pollInterval)
   },
 
   render: function(){
     return(
-      <div className="commentBox">
-      <h1>Offer Available Times for a 4-ball</h1>
-      <CommentList data={this.state.data}/>
-      <CommentForm onCommentSubmit={this.handleCommentSubmit} />
+      <div className="courseBox">
+      <h1>Open your course for a 4Ball</h1>
+      <CourseList data={this.state.data}/>
+      <CourseForm onCourseSubmit={this.handleCourseSubmit} />
       </div>
     );
   }
