@@ -8,6 +8,13 @@ server/config.js
 server/node_modules
 server/public/libs
 
+mobile/hooks
+mobile/platforms
+mobile/plugins
+
+.DS_store
+react-client/node_modules
+
 client/node_modules
 
 
