@@ -24,9 +24,13 @@ angular.module('app.courses.details', [])
 })
 
 .controller('CourseDetailCtrl', function($scope, $stateParams, CourseService) {
+
   $scope.course = CourseService.get($stateParams.courseId);
-  $scope.datetime;
+
   $scope.getDateTime = function(event) {
-    $scope.datetime = event.target.value;
+    var datetime = event.target.value;
+    var re = /\d{2}:\d{2}/ig;
+    var result = re.exec(datetime)[0];
+    $scope.teeTime = result.split(':').join("");
   }
 });
