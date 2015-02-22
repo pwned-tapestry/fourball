@@ -15,51 +15,35 @@ var fiveCourses = [
     name: "Presidio Golf Course",
     description: "test",
     address: "300 Finley Road, San Francisco, CA 94129",
-    location : {
-      type: "Point",
-      coordinates: [37.788773, -122.460603]
-    }
+    location : [37.788773, -122.460603]
   },
   {
     name: "TPC Harding Park",
     description: "test",
     address: "99 Harding Rd, San Francisco, CA 94132",
-    location : {
-      type: "Point",
-      coordinates: [37.724035, -122.492532]
-    }
+    location : [37.724035, -122.492532]
   },
   {
     name: "John McLaren Park",
     description: "test",
     address: "100 John F Shelley Dr, San Francisco, CA 94134",
-    location : {
-      type: "Point",
-      coordinates: [37.719146, -122.421121]
-    }
+    location : [37.719146, -122.421121]
   },
   {
     name: "Lake Merced Golf Club",
     description: "test",
     address: "2300 Junipero Serra Blvd, Daly City, CA 94015",
-    location : {
-      type: "Point",
-      coordinates: [37.697689, -122.477425]
-    }
+    location : [37.697689, -122.477425]
   },
   {
     name: "Cypress Golf Course",
     description: "test",
     address: "2001 Hillside Blvd, Colma, CA 94014",
-    location : {
-      type: "Point",
-      coordinates: [37.680573, -122.446698]
-    }
+    location : [37.680573, -122.446698]
   }
 ];
-console.log('type of inserted coordinates :   ::: ');
-console.log(typeof fiveCourses[1].location.coordinates[1]);
-
+// console.log('type of inserted coordinates :   ::: ');
+// console.log(typeof fiveCourses[1].location.coordinates[1]);
 
 describe('Integration Testing: CRUD Functions & Geospatial : ', function(){
 
@@ -100,17 +84,19 @@ describe('Integration Testing: CRUD Functions & Geospatial : ', function(){
 
   describe('querying for nearest golf courses',function(){
     it('successfuly queries using geoNear', function(done){
-      var newPoint = {type: 'Point', location: [37.783682, -122.409021]}
       Course.geoNear(
         {type: "Point", coordinates: [37.783682, -122.409021]}, 
         {
-          spherical: true, 
-          maxDistance: 1 / 6378137, 
-          distanceMultiplier: 6378137
+          // spherical: true, 
+          // maxDistance: 1 / 6378137, 
+          // distanceMultiplier: 6378137
         })
         .then(function (results) {
           console.log('results :', results);
+          expect(results.length).to.equal(5);
           done();
+        }, function(err){
+          console.log(err);
         });
 
         // .then(function(found){
@@ -124,6 +110,21 @@ describe('Integration Testing: CRUD Functions & Geospatial : ', function(){
         // });
     });
 
+    it('queries using geoNear, filtering for max distance', function(done){
+      Course.geoNear(
+        {type: "Point", coordinates: [37.783682, -122.409021]}, 
+        {
+          maxDistance: .08
+        })
+        .then(function (results) {
+          console.log('LOCATION : results :', results);
+          // expect(results.length).to.equal(5);
+          done();
+        }, function(err){
+          console.log(err);
+        });
+
+    })
   })
 
   xdescribe('using supertest to query for 3 nearest',function(){
