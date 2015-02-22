@@ -28,6 +28,4 @@ mongoose.connection.on('error', function(error){
   }
 });
 
-
-
 module.exports = mongoose;
