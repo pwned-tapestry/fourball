@@ -9,13 +9,13 @@ var CourseSchema = new mongodb.Schema({
   name: String,
   description: String,
   location: {
-    type: "Point",
-    coordinates: [Number]
+    type: [Number],
+    index: '2d'
   },
   address: String
 });
 
-CourseSchema.index({location: '2dsphere'});
+CourseSchema.index({location: '2d'});
 
 var Course = mongodb.model('Courses', CourseSchema);
 
