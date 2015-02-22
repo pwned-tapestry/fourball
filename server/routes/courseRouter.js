@@ -33,6 +33,9 @@ courseRouter
       return response.json(course);
     });
   })
+  // .get('/', function(request, response){
+    //eventually a route using findCourseWithinMiles
+  // })
   .put('/:id', function(request, response){
     courseController.updateCourse({ _id: request.params.id }, request.body, function(error, rows){
       if (error) {

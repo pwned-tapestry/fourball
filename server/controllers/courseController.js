@@ -28,7 +28,6 @@ var findCourse = function(data, callback){
 };
 
 var findCourses = function(data, callback){
-
   Course.find(data, function(error, courses){
     if (error) {
       return callback && callback(error, null);
@@ -48,9 +47,25 @@ var updateCourse = function(findData, updateData, callback) {
 };
 
 
+var findCourseWithinMiles = function(miles, limit, coordinates, callback){
+  Course.geoNear(
+    {type: "Point", coordinates: coordinates}, 
+    {
+      maxDistance: miles*180/(Math.PI*3959),
+      num: limit
+    })
+    .then(function (results) {
+      //eventually sort results by distance;
+      cb(undefined, results);
+    }, function(err){
+      cb(err, undefined);
+    });
+}
+
 module.exports = {
   addCourse: addCourse,
   findCourse: findCourse,
   findCourses: findCourses,
-  updateCourse: updateCourse
+  updateCourse: updateCourse,
+  findCourseWithinMiles: findCourseWithinMiles
 };

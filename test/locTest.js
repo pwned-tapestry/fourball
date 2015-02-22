@@ -1,4 +1,3 @@
-// var mongoose = require('mongoose');
 var expect = require('chai').expect;
 var db = require("../server/database/mongoDb.js");
 var Q = require('q');
@@ -8,6 +7,11 @@ var CourseController = require("../server/controllers/courseController.js");
 var q_findOne = Q.nbind(Course.findOne, Course);
 var q_create = Q.nbind(Course.create, Course);
 var q_find   = Q.nbind(Course.find, Course);
+
+//multiply by this number
+var radConvertor = {
+  toMiles : Math.PI*3959/180
+}
 
 //Reminder: find, then remove;
 var fiveCourses = [
@@ -42,27 +46,24 @@ var fiveCourses = [
     location : [37.680573, -122.446698]
   }
 ];
-// console.log('type of inserted coordinates :   ::: ');
-// console.log(typeof fiveCourses[1].location.coordinates[1]);
 
 describe('Integration Testing: CRUD Functions & Geospatial : ', function(){
 
-  before(function(done){
-    //delete 5
-    q_find({description: "test"})
-      .then(function(courses){
-        console.log('courses.length : ', courses.length);
-        for (var i = 0 ; i < courses.length; i ++){
-          console.log('removing a course...');
-          console.log(courses[i]);
-          courses[i].remove();
-        }
-        done();
-      });
-      done();
-  });
-
   describe('inserting 5 local SF golf courses', function(){
+    before(function(done){
+      //delete 5
+      q_find({description: "test"})
+        .then(function(courses){
+          console.log('courses.length : ', courses.length);
+          for (var i = 0 ; i < courses.length; i ++){
+            console.log('removing a course...');
+            console.log(courses[i]);
+            courses[i].remove();
+          }
+          done();
+        });
+        done();
+    });
 
     it('should insert 5 courses', function(done){
       var tasks = [];
@@ -72,7 +73,6 @@ describe('Integration Testing: CRUD Functions & Geospatial : ', function(){
 
       Q.all(tasks)
         .then(function(results){
-          // console.log("results: ",results);
           expect(results.length).to.equal(5);
           done();
         }, function(err){
@@ -92,22 +92,13 @@ describe('Integration Testing: CRUD Functions & Geospatial : ', function(){
           // distanceMultiplier: 6378137
         })
         .then(function (results) {
-          console.log('results :', results);
+          console.log('length of results:', results.length);
           expect(results.length).to.equal(5);
           done();
         }, function(err){
           console.log(err);
         });
 
-        // .then(function(found){
-        //   console.log('in then success case : ')
-        //   console.log('found :', found);
-        //   done();
-        // }, function(err){
-        //   console.log('in then fail case : ')
-        //   console.log('err :', err);
-        //   done();
-        // });
     });
 
     it('queries using geoNear, filtering for max distance', function(done){
@@ -117,17 +108,36 @@ describe('Integration Testing: CRUD Functions & Geospatial : ', function(){
           maxDistance: .08
         })
         .then(function (results) {
-          console.log('LOCATION : results :', results);
+          for (var i = 0; i < results.length; i ++){
+            console.log(i + " : distance :   "+ results[i].dis*radConvertor.toMiles + " miles");
+          }
           // expect(results.length).to.equal(5);
           done();
         }, function(err){
           console.log(err);
         });
+    });
 
-    })
-  })
+    it('queries for 3', function(done){
+      Course.geoNear(
+        {type: "Point", coordinates: [37.783682, -122.409021]}, 
+        {
+          maxDistance: 10*180/(Math.PI*3959),
+          num: 3
+        })
+        .then(function (results) {
+          console.log('inside then');
+          for (var i = 0; i < results.length; i ++){
+            console.log(i + " : distance :   "+ results[i].dis*radConvertor.toMiles + " miles");
+          }
+          expect(results.length).to.equal(3);
+          done();
+        }, function(err){
+          console.log(err);
+        });
+    });
+  });
 
-  xdescribe('using supertest to query for 3 nearest',function(){
-
+  xdescribe('it queries for 3 nearest',function(){
   });
 });
