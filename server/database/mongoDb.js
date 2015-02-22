@@ -2,7 +2,6 @@
  * Created by wayne on 2/13/15.
  */
 
-
 var global = require('../config');
 var mongoose = require('mongoose');
 
