@@ -2,9 +2,7 @@
  * Created by wayne on 2/13/15.
  */
 
-
 var Course = require('../models/courseModelMongo');
-
 
 var addCourse = function(data, callback) {
   var course = new Course(data);
@@ -55,7 +53,16 @@ var findCourseWithinMiles = function(miles, limit, coordinates, callback){
       num: limit
     })
     .then(function (results) {
-      //eventually sort results by distance;
+      //Native sort, sorts results by distance;
+      results = results.sort(function(x,y){
+        if (x.dis < y.dis){
+          return -1;
+        } else if (x.dis > y.dis){
+          return 1;
+        } else {
+          return 0;
+        }
+      })
       cb(undefined, results);
     }, function(err){
       cb(err, undefined);
@@ -69,3 +76,14 @@ module.exports = {
   updateCourse: updateCourse,
   findCourseWithinMiles: findCourseWithinMiles
 };
+
+function compare(a, b) {
+  if (a is less than b by some ordering criterion) {
+    return -1;
+  }
+  if (a is greater than b by the ordering criterion) {
+    return 1;
+  }
+  // a must be equal to b
+  return 0;
+}
