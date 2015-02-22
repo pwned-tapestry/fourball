@@ -3,7 +3,7 @@ angular.module('app.invite', [])
 .config(function($stateProvider) {
   $stateProvider
   .state('tab.invite', {
-    url: '/invite',
+    url: '/invite/:courseId/:teeTime',
     views: {
       'invite-tab': {
         templateUrl: 'app/invite/invite.html',
@@ -13,7 +13,9 @@ angular.module('app.invite', [])
   });
 })
 
-.controller('InviteIndexCtrl', function($scope, CourseService) {
+.controller('InviteIndexCtrl', function($scope, $stateParams, CourseService) {
+  $scope.course = CourseService.get($stateParams.courseId);
+  $scope.teeTime = $stateParams.teeTime;
   $scope.userInfo = {}
   $scope.bookTime = function(){
     var userInfo = {
