@@ -1,19 +1,22 @@
 var expect = require('chai').expect;
 var db = require("../server/database/mongoDb.js");
 var Q = require('q');
+
+var superagent = require('superagent');
+
 var Course = require("../server/models/courseModelMongo.js");
 var CourseController = require("../server/controllers/courseController.js");
+
 
 var q_findOne = Q.nbind(Course.findOne, Course);
 var q_create = Q.nbind(Course.create, Course);
 var q_find   = Q.nbind(Course.find, Course);
 
-//multiply by this number
+//multiply by this number to convert from radians (returned from mongo) to miles (to send to frontEnd)
 var radConvertor = {
   toMiles : Math.PI*3959/180
 }
 
-//Reminder: find, then remove;
 var fiveCourses = [
   {
     name: "Cypress Golf Course",
@@ -138,7 +141,7 @@ describe('Integration Testing: CRUD Functions & Geospatial : ', function(){
     });
   });
 
-  describe('Controller Unit Tests : findCourseWithinMiles',function(){
+  describe('Controller Unit Tests : findCourseWithinMiles',function(done){
     var requestData = {
       miles: 15,
       limit: 5,
@@ -147,17 +150,12 @@ describe('Integration Testing: CRUD Functions & Geospatial : ', function(){
     it("requests couses within a 15 mile radius of hack reactor :", function(done){
 
       CourseController.findCourseWithinMiles(requestData, function(err, results){
-        console.log("inside testing callBack :");
         if (err){
           console.log("Error :", err);
         }
-        console.log("Results Ordered:", results);
+        expect(results.length).to.equal(5);
         done();
       });      
-    });
-
-    it("makes the same request by hitting the server endpoint @ :/sortedCourses", function(){
-      
     });
   });
 
