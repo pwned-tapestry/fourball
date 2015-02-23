@@ -16,6 +16,12 @@ var radConvertor = {
 //Reminder: find, then remove;
 var fiveCourses = [
   {
+    name: "Cypress Golf Course",
+    description: "test",
+    address: "2001 Hillside Blvd, Colma, CA 94014",
+    location : [37.680573, -122.446698]
+  },
+  {
     name: "Presidio Golf Course",
     description: "test",
     address: "300 Finley Road, San Francisco, CA 94129",
@@ -38,26 +44,20 @@ var fiveCourses = [
     description: "test",
     address: "2300 Junipero Serra Blvd, Daly City, CA 94015",
     location : [37.697689, -122.477425]
-  },
-  {
-    name: "Cypress Golf Course",
-    description: "test",
-    address: "2001 Hillside Blvd, Colma, CA 94014",
-    location : [37.680573, -122.446698]
   }
 ];
 
 describe('Integration Testing: CRUD Functions & Geospatial : ', function(){
 
-  describe('inserting 5 local SF golf courses', function(){
+  describe('Schema Unit Tests : inserting 5 local SF golf courses', function(){
     before(function(done){
+      var coursesDeleted = 0;
       //delete 5
       q_find({description: "test"})
         .then(function(courses){
           console.log('courses.length : ', courses.length);
           for (var i = 0 ; i < courses.length; i ++){
-            console.log('removing a course...');
-            console.log(courses[i]);
+            console.log('deleted '+ ++coursesDeleted + " courses");
             courses[i].remove();
           }
           done();
@@ -82,7 +82,7 @@ describe('Integration Testing: CRUD Functions & Geospatial : ', function(){
 
   });
 
-  describe('querying for nearest golf courses',function(){
+  describe('Schema Unit Tests : querying for nearest golf courses',function(){
     it('successfuly queries using geoNear', function(done){
       Course.geoNear(
         {type: "Point", coordinates: [37.783682, -122.409021]}, 
@@ -111,14 +111,14 @@ describe('Integration Testing: CRUD Functions & Geospatial : ', function(){
           for (var i = 0; i < results.length; i ++){
             console.log(i + " : distance :   "+ results[i].dis*radConvertor.toMiles + " miles");
           }
-          // expect(results.length).to.equal(5);
+          expect(!!results).to.equal(true);
           done();
         }, function(err){
           console.log(err);
         });
     });
 
-    it('queries for 3', function(done){
+    it('queries using geoNear, filtering for max distance and num', function(done){
       Course.geoNear(
         {type: "Point", coordinates: [37.783682, -122.409021]}, 
         {
@@ -138,6 +138,27 @@ describe('Integration Testing: CRUD Functions & Geospatial : ', function(){
     });
   });
 
-  xdescribe('it queries for 3 nearest',function(){
+  describe('Controller Unit Tests : findCourseWithinMiles',function(){
+    var requestData = {
+      miles: 15,
+      limit: 5,
+      coordinates: [37.783707, -122.408978]
+    }
+    it("requests couses within a 15 mile radius of hack reactor :", function(done){
+
+      CourseController.findCourseWithinMiles(requestData, function(err, results){
+        console.log("inside testing callBack :");
+        if (err){
+          console.log("Error :", err);
+        }
+        console.log("Results Ordered:", results);
+        done();
+      });      
+    });
+
+    it("makes the same request by hitting the server endpoint @ :/sortedCourses", function(){
+      
+    });
   });
+
 });
