@@ -11,7 +11,6 @@ var scheduleController = require('../controllers/scheduleController');
 
 coreRouter
   .post('/bookteetime', function(request, response){
-    //console.log(request.body);
     scheduleController.bookTeeTime(request.body, function(error, result){
       if (error) {
         console.log("error", error);

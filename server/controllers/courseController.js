@@ -22,7 +22,6 @@ var findCourse = function(data, callback){
     }
     return callback && callback(null, course);
   });
-
 };
 
 var findCourses = function(data, callback){
@@ -45,16 +44,15 @@ var updateCourse = function(findData, updateData, callback) {
 };
 
 
-//signature example: findCourseWithinMiles(10, 3, [37.783682, -122.409021], fn(){})
 var findCourseWithinMiles = function(requestData, callback){
-  console.log("in fcwM: ,", requestData);
-  //data signature:
-  //
+  //All must be specified in for
+  //schema's geoNear method to not throw an error.
   // {
   // miles: num,
   // limit: num,
   // coordinates: [num, num]
   // }
+
   var miles       = requestData.miles; 
   var limit       = requestData.limit;
   var coordinates = requestData.coordinates;
@@ -66,7 +64,7 @@ var findCourseWithinMiles = function(requestData, callback){
       num: limit
     })
     .then(function (results) {
-      console.log("returned query Unordered Results:", results);
+      // console.log("returned query Unordered Results:", results);
       //Native sort, sorts results by distance;
       results = results.sort(function(x,y){
         if (x.dis < y.dis){
