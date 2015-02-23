@@ -2,7 +2,6 @@
  * Created by wayne on 2/13/15.
  */
 
-
 var global = require('../config');
 var mongoose = require('mongoose');
 
@@ -28,7 +27,5 @@ mongoose.connection.on('error', function(error){
     return console.log('>', Error);
   }
 });
-
-
 
 module.exports = mongoose;

@@ -8,6 +8,16 @@ var courseRouter = express.Router();
 var courseController = require('../controllers/courseController');
 
 courseRouter
+  .get('/sortedCourses', function(request, response){
+    console.log('inside SortedCourses');
+    courseController.findCourseWithinMiles(request.body, function(error, courses){
+      if (error){
+        return response.end(error);
+      }
+      return response.json(courses);
+    });
+
+  })
   .post('/', function(request, response){
     // TODO: Error checking in course PUT
     courseController.addCourse(request.body, function(error, course){
@@ -16,6 +26,7 @@ courseRouter
       }
       response.json(course);
     });
+
   })
   .get('/', function(request, response){
     courseController.findCourses({}, function(error, courses){
@@ -41,7 +52,5 @@ courseRouter
       response.json(rows);
     });
   });
-
-
 
 module.exports = courseRouter;

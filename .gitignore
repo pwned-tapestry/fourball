@@ -12,6 +12,9 @@ mobile/hooks
 mobile/platforms
 mobile/plugins
 
+test/node_modules
+test/npm-debug.log
+
 .DS_store
 react-client/node_modules
 

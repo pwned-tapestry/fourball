@@ -2,9 +2,7 @@
  * Created by wayne on 2/13/15.
  */
 
-
 var Course = require('../models/courseModelMongo');
-
 
 var addCourse = function(data, callback) {
   var course = new Course(data);
@@ -24,11 +22,9 @@ var findCourse = function(data, callback){
     }
     return callback && callback(null, course);
   });
-
 };
 
 var findCourses = function(data, callback){
-
   Course.find(data, function(error, courses){
     if (error) {
       return callback && callback(error, null);
@@ -48,9 +44,47 @@ var updateCourse = function(findData, updateData, callback) {
 };
 
 
+var findCourseWithinMiles = function(requestData, callback){
+  //All must be specified in for
+  //schema's geoNear method to not throw an error.
+  // {
+  // miles: num,
+  // limit: num,
+  // coordinates: [num, num]
+  // }
+
+  var miles       = requestData.miles; 
+  var limit       = requestData.limit;
+  var coordinates = requestData.coordinates;
+
+  Course.geoNear(
+    {type: "Point", coordinates: coordinates}, 
+    {
+      maxDistance: miles*180/(Math.PI*3959),
+      num: limit
+    })
+    .then(function (results) {
+      // console.log("returned query Unordered Results:", results);
+      //Native sort, sorts results by distance;
+      results = results.sort(function(x,y){
+        if (x.dis < y.dis){
+          return -1;
+        } else if (x.dis > y.dis){
+          return 1;
+        } else {
+          return 0;
+        }
+      })
+      callback(undefined, results);
+    }, function(err){
+      callback(err, undefined);
+    });
+};
+
 module.exports = {
   addCourse: addCourse,
   findCourse: findCourse,
   findCourses: findCourses,
-  updateCourse: updateCourse
+  updateCourse: updateCourse,
+  findCourseWithinMiles: findCourseWithinMiles
 };
