@@ -9,5 +9,15 @@
     <h3>{{course.name}}</h3>
     <p>{{ course.description }}</p>
     <p>{{course.address}}</p>
+    <label class="item item-input translucent">
+      <span class="input-label">Date</span>
+      <input type="datetime-local" ng-model="datetime" ui-event="{blur: 'getDateTime($event)'}">
+    </label>
+    <div class="list" ng-show="dateSelected">
+      <div class="item item-button-right translucent" ng-repeat="info in course.teetimes | filter: gteOrEqlSelectTeeTime | orderBy: 'time' | limitTo: limit">
+        {{info.time}}
+        <a class="button icon-left ion-chevron-right button-clear button-dark" href="#/tab/invite/{{course._id}}/{{info.time}}"></a>
+      </div>
+    </div>
   </ion-content>
 </ion-view>

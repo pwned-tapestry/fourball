@@ -5,6 +5,13 @@
   <ion-content has-tabs="true">
     <div class="list list-inset">
       <label class="item item-input">
+        <span class="input-label">{{course.name}}</span>
+      </label>
+      <label class="item item-input">
+        <span class="input-label">Tee Time:</span>
+        <span class="input-label pull-right">{{teeTime}}</span>
+      </label>
+      <label class="item item-input">
         <span class="input-label">Your Name</span>
         <input type="text" ng-model="userInfo.userName">
       </label>
