@@ -1,3 +1,5 @@
+var React = require('react');
+
 var Course = React.createClass({
   render: function() {
     return (
@@ -140,3 +142,9 @@ var CourseBox = React.createClass({
     );
   }
 });
+
+React.render(
+
+  <CourseBox url="api/course/" pollInterval={20000} />,
+  document.getElementById('content')
+);

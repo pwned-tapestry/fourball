@@ -1,26 +1,19 @@
 <html>
     <head>
         <title>Create a new course</title>
-        <script src="http://fb.me/react-0.12.2.js"></script>
-        <script src="http://fb.me/JSXTransformer-0.12.2.js"></script>
-        <script src="http://code.jquery.com/jquery-1.10.0.min.js"></script>
-        <script type="text/jsx" src="app/courseInput/courseInputBox.js"></script>
 
-        <!-- For the repl -->
-        <script type='text/javascript' id='lt_ws' src='http://localhost:63644/socket.io/lighttable/ws.js'></script>
+        <!-- Walk before we run. -->
+        <!-- Run this to build the project -->
 
 
     </head>
     <body>
         <div id="content"></div>
-        <script type="text/jsx">
 
-            React.render(
+        <script src="http://code.jquery.com/jquery-1.10.0.min.js"></script>
 
-                <CourseBox url="api/course/" pollInterval={20000} />,
-                document.getElementById('content')
-            );
+        <script src="bundle.js"></script>
 
-        </script>
+
     </body>
 </html>
