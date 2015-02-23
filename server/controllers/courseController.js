@@ -45,7 +45,20 @@ var updateCourse = function(findData, updateData, callback) {
 };
 
 
-var findCourseWithinMiles = function(miles, limit, coordinates, callback){
+//signature example: findCourseWithinMiles(10, 3, [37.783682, -122.409021], fn(){})
+var findCourseWithinMiles = function(requestData, callback){
+  console.log("in fcwM: ,", requestData);
+  //data signature:
+  //
+  // {
+  // miles: num,
+  // limit: num,
+  // coordinates: [num, num]
+  // }
+  var miles       = requestData.miles; 
+  var limit       = requestData.limit;
+  var coordinates = requestData.coordinates;
+
   Course.geoNear(
     {type: "Point", coordinates: coordinates}, 
     {
@@ -53,6 +66,7 @@ var findCourseWithinMiles = function(miles, limit, coordinates, callback){
       num: limit
     })
     .then(function (results) {
+      console.log("returned query Unordered Results:", results);
       //Native sort, sorts results by distance;
       results = results.sort(function(x,y){
         if (x.dis < y.dis){
@@ -63,11 +77,11 @@ var findCourseWithinMiles = function(miles, limit, coordinates, callback){
           return 0;
         }
       })
-      cb(undefined, results);
+      callback(undefined, results);
     }, function(err){
-      cb(err, undefined);
+      callback(err, undefined);
     });
-}
+};
 
 module.exports = {
   addCourse: addCourse,
@@ -76,14 +90,3 @@ module.exports = {
   updateCourse: updateCourse,
   findCourseWithinMiles: findCourseWithinMiles
 };
-
-function compare(a, b) {
-  if (a is less than b by some ordering criterion) {
-    return -1;
-  }
-  if (a is greater than b by the ordering criterion) {
-    return 1;
-  }
-  // a must be equal to b
-  return 0;
-}
