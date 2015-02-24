@@ -5,21 +5,21 @@
   <ion-content has-tabs="true">
     <div class="list list-inset">
       <label class="item item-input">
-        <span class="input-label">{{course.name}}</span>
+        <span class="input-label">{{vm.course.name}}</span>
       </label>
       <label class="item item-input">
         <span class="input-label">Tee Time:</span>
-        <span class="input-label pull-right">{{teeTime}}</span>
+        <span class="input-label pull-right">{{vm.teeTime}}</span>
       </label>
       <label class="item item-input">
         <span class="input-label">Your Name</span>
-        <input type="text" ng-model="userInfo.userName">
+        <input type="text" ng-model="vm.userInfo.userName">
       </label>
       <label class="item item-input">
         <span class="input-label" >(Area Code) + (Number)</span>
-        <input type="tel" ng-model="userInfo.userNumber">
+        <input type="tel" ng-model="vm.userInfo.userNumber">
       </label>
-      <button class="button button-positive button-block" ng-click="bookTime()">Book It</button>
+      <button class="button button-positive button-block" ng-click="vm.bookTime()">Book It</button>
     </div>
   </ion-content>
 </ion-view>
