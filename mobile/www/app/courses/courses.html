@@ -6,7 +6,7 @@
 <ion-view title="Course Information">
   <ion-content>
     <ion-list>
-      <ion-item back-img="{{course.url}}" ng-repeat="course in courses" type="item-text-wrap" href="#/tab/course/{{course._id}}">
+      <ion-item back-img="{{course.url}}" ng-repeat="course in vm.courses" type="item-text-wrap" href="#/tab/course/{{course._id}}">
         <h3>{{course.name}}</h3>
         <p>{{course.description}}</p>
         <p>{{course.address}}</p>

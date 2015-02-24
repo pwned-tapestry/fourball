@@ -7,7 +7,7 @@ angular.module('app.courses', ['app.courses.details'])
     views: {
       'courses-tab': {
         templateUrl: 'app/courses/courses.html',
-        controller: 'CourseIndexCtrl'
+        controller: 'CourseIndexCtrl as vm'
       }
     }
   });
@@ -23,9 +23,10 @@ angular.module('app.courses', ['app.courses.details'])
   };
 })
 
-.controller('CourseIndexCtrl', function ($scope, CourseService) {
+.controller('CourseIndexCtrl', function (CourseService) {
+  var vm = this;
   CourseService.getCoursesWithTeeTimes()
   .then(function(courses) {
-    $scope.courses = courses;
+    vm.courses = courses;
   });
 });
