@@ -28,48 +28,37 @@ function CourseService($http) {
     })[0];
   }
 
-  function bookTime(userInfo) {
-    console.log("sending userInfo :", userInfo);
-    console.log("http...", $http);
-
-    //pass bookingInfo:
-    //  date: mmddyyyy -string
-    //  courseId: string
-    //  
-    //  time: xxxx - string
-    //  user: string
-    //  players: string
-    //  _id: string (for booking)
-
-    //post with bookingInfo:
+  function bookTime(userInfo, teeTimeId) {
 
     var newUser = {
       cell: userInfo.userName,
       firstName: userInfo.userNumber
-    }
+    };
 
     //create a new user
     $http.post("http://localhost:8080/api/user", newUser)
-      .then(function(returnedUser){
-        //then send a text, to that user
-        console.log("returnedUser : ", returnedUser);
-        return $http.post("http://localhost:8080/api/schedule/bookTeeTime", userInfo)
-                .then(function(data, status){
-                  console.log('success : ', data);
-                },function(data, status){
-                  console.log('error :', data);
-                });
-      }, function(error){
-        console.log("error :", error);
-      });
 
-    // $http.post("http://localhost:8080/api/schedule/bookTeeTime", userInfo)
-    //   .success(function(data, status){
-    //     console.log("success", data);
-    //   })
-    //   .error(function(data, status){
-    //     console.log("failure :", data);
-    //   });
+    .success(function(returnedUser){
+      //then send a text, to that user
+      $http.post("http://localhost:8080/api/schedule/bookTeeTime", userInfo)
+        .success(function(data, status){
+          console.log('success : ', data);
+        })
+        .error(function(data, status){
+          console.log('error :', data);
+        });
+      // book the teeTime -- should be combined into one api call with above post to schedule/bookTeeTime
+      $http.post("http://localhost:8080/api/bookteetime",{userId: returnedUser._id, teetimeId: teeTimeId})
+        .success(function(data, status, headers, config) {
+          console.log("data after post to /bookteetime", data);
+        })
+        .error(function(data, status, headers, config) {
+          console.log("error:", error);
+        });
+    })
+    .error(function(error, status, headers, config) {
+      console.log("error:", error);
+    });
   }
 
   return {
