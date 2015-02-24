@@ -7,7 +7,7 @@ angular.module('app.courses.details', [])
     views: {
       'courses-tab': {
         templateUrl: 'app/courses/details/details.html',
-        controller: 'CourseDetailCtrl'
+        controller: 'CourseDetailCtrl as vm'
       }
     }
   });
@@ -23,21 +23,21 @@ angular.module('app.courses.details', [])
   };
 })
 
-.controller('CourseDetailCtrl', function($scope, $stateParams, CourseService) {
-
-  $scope.course = CourseService.get($stateParams.courseId);
-  $scope.limit = 3;
-  $scope.dateSelected = false;
-  $scope.getDateTime = function(event) {
+.controller('CourseDetailCtrl', function($stateParams, CourseService) {
+  var vm = this;
+  vm.course = CourseService.get($stateParams.courseId);
+  vm.limit = 3;
+  vm.dateSelected = false;
+  vm.getDateTime = function(event) {
     var datetime = event.target.value;
     var re = /\d{2}:\d{2}/ig;
     var result = re.exec(datetime)[0];
-    $scope.teeTime = result.split(':').join("");
-    $scope.dateSelected = true;
+    vm.teeTime = result.split(':').join("");
+    vm.dateSelected = true;
   }
 
-  $scope.gteOrEqlSelectTeeTime = function(info){
-    return info.time > $scope.teeTime;
+  vm.gteOrEqlSelectTeeTime = function(info){
+    return info.time > vm.teeTime;
   }
 
 });
