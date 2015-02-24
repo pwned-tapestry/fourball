@@ -24,7 +24,8 @@ angular.module('app.courses', ['app.courses.details'])
 })
 
 .controller('CourseIndexCtrl', function ($scope, CourseService) {
-  CourseService.getCoursesWithTeeTimes(function(courses){
+  CourseService.getCoursesWithTeeTimes()
+  .then(function(courses) {
     $scope.courses = courses;
   });
 });
