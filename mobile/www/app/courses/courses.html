@@ -12,15 +12,14 @@
         <p>{{course.address}}</p>
       </ion-item>
  -->    
-      <ion-item ng-repeat="course in vm.courses" type="item-text-wrap">
-        <a class="itemHeight" href="#/tab/course/{{course._id}}">
-          <!-- <image src="{{course.url}}" style="display:block;padding:0px;"> -->
-          <image src="{{course.url}}" style="max-height:280px;"> 
-            <h3 style="position:absolute;left:0px;top:0px;font-size: 32px;">
+      <ion-item class="p2text" ng-repeat="course in vm.courses" type="item-text-wrap">
+        <a href="#/tab/course/{{course._id}}">
+          <image src="{{course.url}}" style="max-height:280px;">
+            <h3 style="position:absolute;left:0px;top:10px;font-size: 32px;">
             {{course.name}}
             </h3>
-            <h2 style="position:absolute;left:0px;top:35px;font-size: 16px;font-family:Garamond;">{{course.description}}</h2>
-            <h1 style="position:absolute;left:0px;top:40px;font-size: 16px;font-family:Garamond;">{{course.address}}</h1>            
+            <h2 style="position:absolute;left:0px;top:45px;font-size: 16px;font-family:Garamond;">{{course.description}}</h2>
+            <h1 style="position:absolute;left:0px;top:50px;font-size: 16px;font-family:Garamond;">{{course.address}}</h1>            
           </image>
 
       </ion-item>

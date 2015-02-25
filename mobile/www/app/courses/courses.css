@@ -20,9 +20,12 @@ ion-item.item.item-complex {
   max-height: 280px;
 }
 */
-.item {
+.p2text {
   padding: 0 !important;
-  border-bottom: none;
+}
+
+.item-display {
+  font-weight: bold;
 }
 
 /*padding, css style*/

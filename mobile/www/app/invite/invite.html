@@ -4,21 +4,30 @@
 <ion-view title="Invite Friends">
   <ion-content has-tabs="true">
     <div class="list list-inset">
-      <label class="item item-input">
+      <label class="item item-input item-display">
         <span class="input-label">{{vm.course.name}}</span>
       </label>
-      <label class="item item-input">
+      <label class="item item-input item-display">
         <span class="input-label">Tee Time:</span>
         <span class="input-label pull-right">{{vm.teeTime}}</span>
       </label>
+      <label class="item item-input item-display">
+        <span class="input-label">Players:</span>
+<!--         <span class="input-label pull-right">{{vm.teeTime}}</span>
+ -->      </label>
       <label class="item item-input">
         <span class="input-label">Your Name</span>
         <input type="text" ng-model="vm.userInfo.userName">
       </label>
       <label class="item item-input">
-        <span class="input-label" >(Area Code) + (Number)</span>
+        <span class="input-label">(Area Code) + (Number)</span>
         <input type="tel" ng-model="vm.userInfo.userNumber">
       </label>
+    <label class="item item-input item-display">
+      <span class="input-label">Your Friends:</span>
+    </label>
+
+
 <ul class="list">
 
   <li class="item item-checkbox">
@@ -42,9 +51,9 @@
      Shitbird
   </li>
 
+    <button class="button button-positive button-block" ng-click="vm.bookTime()">Book It</button>
 </ul>
 
-      <button class="button button-positive button-block" ng-click="vm.bookTime()">Book It</button>
     </div>
   </ion-content>
 </ion-view>
