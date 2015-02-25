@@ -13,9 +13,9 @@
       </ion-item>
  -->    
       <ion-item ng-repeat="course in vm.courses" type="item-text-wrap">
-        <a href="#/tab/course/{{course._id}}">
+        <a class="itemHeight" href="#/tab/course/{{course._id}}">
           <!-- <image src="{{course.url}}" style="display:block;padding:0px;"> -->
-          <image class="itemHeight" src="{{course.url}}"> 
+          <image src="{{course.url}}"> 
             <h3 style="position:absolute;left:0px;top:0px;font-size: 32px;">
             {{course.name}}
 <!--               <p>{{course.description}}</p>
@@ -24,7 +24,7 @@
             </h3>
           </image>
 
-
+      </ion-item>
 
 
 

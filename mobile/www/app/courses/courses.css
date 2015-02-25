@@ -15,10 +15,10 @@ ion-item.item.item-complex {
   min-height: 33%;
 }
 
-.itemHeight {
-  height: 33%;
+/*.itemHeight {
+  height: 280px;
 }
-
+*/
 .item {
   padding: 0 !important;
   border-bottom: none;
