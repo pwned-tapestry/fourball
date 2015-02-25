@@ -23,7 +23,8 @@ angular.module('app.invite', [])
   vm.bookTime = function(){
     var userInfo = {
       userName    : vm.userInfo.userName,
-      userNumber  : vm.userInfo.userNumber
+      userNumber  : vm.userInfo.userNumber,
+      invitees    : vm.userInfo.invitees
     };
     CourseService.bookTime(userInfo, teeTimeId);
   }
