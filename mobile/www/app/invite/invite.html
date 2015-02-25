@@ -13,8 +13,11 @@
       </label>
       <label class="item item-input item-display">
         <span class="input-label">Players:</span>
-<!--         <span class="input-label pull-right">{{vm.teeTime}}</span>
- -->      </label>
+        <span class="input-label pull-right"><!-- {{vm.teeTime}} --> 1</span>
+      </label>
+
+      <button class="button button-positive button-block" ng-click="vm.bookTime()">Book It</button>
+
       <label class="item item-input">
         <span class="input-label">Your Name</span>
         <input type="text" ng-model="vm.userInfo.userName">
