@@ -3,25 +3,28 @@ angular.module('app.invite', [])
 .config(function($stateProvider) {
   $stateProvider
   .state('tab.invite', {
-    url: '/invite/:courseId/:teeTime',
+    url: '/invite/:courseId/:teeTime/:teeTimeId',
     views: {
       'invite-tab': {
         templateUrl: 'app/invite/invite.html',
-        controller: 'InviteIndexCtrl'
+        controller: 'InviteIndexCtrl as vm'
       }
     }
   });
 })
 
-.controller('InviteIndexCtrl', function($scope, $stateParams, CourseService) {
-  $scope.course = CourseService.get($stateParams.courseId);
-  $scope.teeTime = $stateParams.teeTime;
-  $scope.userInfo = {}
-  $scope.bookTime = function(){
+.controller('InviteIndexCtrl', function($stateParams, CourseService) {
+  var vm = this;
+  vm.course = CourseService.get($stateParams.courseId);
+  vm.teeTime = $stateParams.teeTime;
+  vm.userInfo = {}
+  var teeTimeId = $stateParams.teeTimeId;
+
+  vm.bookTime = function(){
     var userInfo = {
-      userName    : $scope.userInfo.userName,
-      userNumber  : $scope.userInfo.userNumber
+      userName    : vm.userInfo.userName,
+      userNumber  : vm.userInfo.userNumber
     };
-    CourseService.bookTime(userInfo); 
+    CourseService.bookTime(userInfo, teeTimeId);
   }
 });
