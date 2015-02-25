@@ -13,10 +13,11 @@
 
 ion-item.item.item-complex {
   min-height: 33%;
+  max-height: 33%;
 }
 
 /*.itemHeight {
-  height: 280px;
+  max-height: 280px;
 }
 */
 .item {
