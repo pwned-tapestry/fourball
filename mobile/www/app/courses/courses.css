@@ -1,3 +1,8 @@
+/** {
+  padding: 0;
+  margin: 0;
+}
+*/
 .scroll {
   height: 100%;
 }
@@ -9,3 +14,10 @@
 ion-item.item.item-complex {
   min-height: 33%;
 }
+
+.item {
+  padding: 0 !important;
+  border-bottom: none;
+}
+
+/*padding, css style*/
