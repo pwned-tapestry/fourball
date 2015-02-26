@@ -97,7 +97,7 @@ var hasTeeTime = function(data, callback) {
     var availableTeeTimes = [];
     if (schedule === null) return callback(null, null);
     for (var i = 0; i < schedule.teetimes.length; i++) {
-      if (schedule.teetimes[i].user === null && schedule.teetimes[i].time > data.start && schedule.teetimes[i].time < data.end) {
+      if (schedule.teetimes[i].reserved === false && schedule.teetimes[i].time > data.start && schedule.teetimes[i].time < data.end) {
         availableTeeTimes.push(schedule.teetimes[i]);
       }
     }
@@ -109,7 +109,7 @@ var hasTeeTime = function(data, callback) {
 // userId
 // teetimeId
 var bookTeeTime = function(data, callback) {
-  console.log(data);
+  console.log("data input to bookTeeTime:", data);
   Schedule.findOne({ "teetimes._id": data.teetimeId }, function(error, schedule){
     if (error) {
       return callback && callback(error, null);
@@ -120,7 +120,10 @@ var bookTeeTime = function(data, callback) {
 
     for (var i = 0; i < schedule.teetimes.length; i++) {
       if (schedule.teetimes[i]._id.toString() === data.teetimeId) {
-        schedule.teetimes[i].user = data.userId;
+        schedule.teetimes[i].numPlayers = 1;
+        schedule.teetimes[i].reserved = true;
+        schedule.teetimes[i].reservedBy = data.user;
+
         schedule.save(function(error, data){
           if (error) {
             console.log(error);
