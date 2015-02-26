@@ -10,6 +10,7 @@ function CourseService($http, $q) {
     var that = this;
     $http.get("http://localhost:8080/api/coursesWithTeeTimes")
       .success(function(courses, status, headers, config) {
+        console.log("courses :", courses);
         console.log("Received data via HTTP");
         that._courses = courses;
         that._courses[0].url = 'http://www.kauaigolfclubrentals.com/wp-content/uploads/2011/09/kiahuna-golf-course-kauai.jpg';

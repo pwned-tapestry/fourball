@@ -19,6 +19,6 @@ test/npm-debug.log
 react-client/node_modules
 
 client/node_modules
-
+npm-debug.log
 
 .idea

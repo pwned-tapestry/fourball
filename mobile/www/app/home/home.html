@@ -1,5 +1,11 @@
-<ion-view title="">
-  <a class="button button-full button-positive round-button viewPortCenter" href="#/tab/courses">
+<ion-view title="Nearby Courses" href="#/tab/courses">
+<!--   <a class="button button-full button-positive round-button viewPortCenter" href="#/tab/courses">
     <div class="absoluteCenter">4ball</div>
   </a>
+ -->
+  <ion-content ng-controller="MapController">
+    <div id="map" data-tap-disabled="true"></div>
+  </ion-content>
+    <a class="button button-positive inline-button viewPortCenter" href="#/tab/courses">GO</a>
+
 </ion-view>
