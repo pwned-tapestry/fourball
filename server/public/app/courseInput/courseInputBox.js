@@ -1,12 +1,13 @@
 var React = require('react');
 var Router = require('react-router');
-var Alert = require('react-bootstrap').Alert;
+var Bootstrap = require('react-bootstrap');
 
 var Route = Router.Route;
 var DefaultRoute = Router.DefaultRoute;
 var RouteHandler = Router.RouteHandler;
+var Link = Router.Link;
 
-
+var Alert = Bootstrap.Alert;
 
 
 //After selecting a course
