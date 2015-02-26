@@ -25,8 +25,10 @@ angular.module('app.courses', ['app.courses.details'])
 
 .controller('CourseIndexCtrl', function (CourseService) {
   var vm = this;
+  console.log('controller loaded');
   CourseService.getCoursesWithTeeTimes()
   .then(function(courses) {
+    console.log('got some courses');
     vm.courses = courses;
   });
 });
