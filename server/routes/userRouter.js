@@ -32,6 +32,7 @@ userRouter
         return response.status(500).end(error);
       }
       // HTTP Status 201 - created
+      console.log("user created:", user);
       response.status(201).json(user);
     });
   })

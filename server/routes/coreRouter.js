@@ -29,7 +29,7 @@ coreRouter
         function(cb){
           scheduleController.hasTeeTime({
             courseId: courses[0]._id,
-            date: '02142015',
+            date: '02252015',
             start: '0600',
             end: '1500' }, function(error, schedule){
             cb(schedule);
@@ -38,7 +38,7 @@ coreRouter
         function(cb){
           scheduleController.hasTeeTime({
             courseId: courses[1]._id,
-            date: '02142015',
+            date: '02252015',
             start: '0600',
             end: '1500' }, function(error, schedule){
             cb(schedule);
@@ -47,7 +47,7 @@ coreRouter
         function(cb){
           scheduleController.hasTeeTime({
             courseId: courses[2]._id,
-            date: '02142015',
+            date: '02252015',
             start: '0600',
             end: '1500' }, function(error, schedule){
             cb(schedule);

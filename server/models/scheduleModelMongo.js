@@ -9,13 +9,13 @@ var ScheduleSchema = new mongodb.Schema({
   date: String,
   teetimes: [{
     time: String,
-    user: String,
-    players: Number
+    reserved: Boolean,
+    numPlayers: Number,
+    reservedBy: String,
+    players: [String]
   }]
 });
 
-
 var Schedule = mongodb.model('Schedules', ScheduleSchema);
-
 
 module.exports = Schedule;

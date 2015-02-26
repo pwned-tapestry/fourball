@@ -13,7 +13,7 @@ telephony.sendMessage = function(data){
 
   if (config.environment === 'dev') {
     console.log('msgContent: ', msgContent);
-    console.log('fromNum : ', data.userName);
+    console.log('from : ', data.userName);
     console.log('toNum : ', data.userNumber);
   }
 

@@ -66,7 +66,7 @@ scheduleRouter
     //courseController.update(
     //  schedule[]
     //)
-    response.send("Booking confirmed.");
+    response.send("Twillio confirmation message sent.");
   });
 
 module.exports = scheduleRouter;
