@@ -1,5 +1,6 @@
 var React = require('react');
 var Router = require('react-router');
+var Alert = require('react-bootstrap').Alert;
 
 var Route = Router.Route;
 var DefaultRoute = Router.DefaultRoute;
@@ -57,9 +58,9 @@ var Course = React.createClass({
       {this.props.name}
       </h2>
 
-      <h3 className="courseAddress">
+      <Alert bsStyle="warning">
       {this.props.address}
-      </h3>
+      </Alert>
 
       {this.props.children}
       </div>
