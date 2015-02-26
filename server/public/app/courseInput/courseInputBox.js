@@ -1,4 +1,52 @@
 var React = require('react');
+var Router = require('react-router');
+
+var Route = Router.Route;
+var DefaultRoute = Router.DefaultRoute;
+var RouteHandler = Router.RouteHandler;
+
+
+
+
+//After selecting a course
+//We'll render all the tee times for that course
+
+//We'll keep tee times very simple for now. Just a div with text
+//This is the landing place for the data
+var TeeTime = React.createClass({
+  render: function() {
+    return (
+      <div className="teeTime">
+      {this.props.time}
+      </div>
+
+    )
+  }
+})
+
+//And we'll use a TeeTimeList to hold each tee time
+//This matches the Course - CourseList pattern
+var TeeTimeList = React.createClass({
+  render: function(){
+    var teeTimeNodes = this.props.data.map(function(teeTimes){
+      return (
+        <TeeTime time={teeTimes.time}>
+        </TeeTime>
+      );
+
+    });
+    //render contains a map function
+    //which creates a node out of every element in teeTimes
+    //and that node is a TeeTime class
+    //Which gets put into a teeTimeList class
+    return (
+      <div className="teeTimeList">
+        {teeTimeNodes}
+      </div>
+    );
+  }
+});
+
 
 var Course = React.createClass({
   render: function() {
@@ -129,7 +177,7 @@ var CourseBox = React.createClass({
 
   componentDidMount: function(){
     this.loadCoursesFromServer();
-    setInterval(this.loadCoursesFromServer, this.props.pollInterval)
+    setInterval(this.loadCoursesFromServer, 20000)
   },
 
   render: function(){
@@ -143,8 +191,19 @@ var CourseBox = React.createClass({
   }
 });
 
-React.render(
 
-  <CourseBox url="api/course/" pollInterval={20000} />,
-  document.getElementById('content')
+//TODO add back
+//<CourseBox url="api/course/" pollInterval={20000} />,
+//<Route name="courseSched" path="course/:id" handler={Schedule}>
+
+var routes = (
+  <Route handler={CourseBox}>
+    <DefaultRoute handler={CourseBox}/>
+  </Route>
 );
+
+Router.run(routes, function(Handler){
+
+  React.render(<Handler/>, document.getElementById('content'));
+
+});
