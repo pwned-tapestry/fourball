@@ -11,7 +11,13 @@ var makeSchedule = function(start, end, minutes) {
   start = nextTime(start, 0);
 
   while (Number(start) < Number(end)) {
-    result.push({ time: start, user: null, players: 4 });
+    result.push({
+      time: start,
+      reserved: false,
+      reservedBy: null,
+      numPlayers: 0,
+      players: []
+    });
     start = nextTime(start, minutes);
   }
 
