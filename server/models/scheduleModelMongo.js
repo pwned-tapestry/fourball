@@ -11,8 +11,8 @@ var ScheduleSchema = new mongodb.Schema({
     time: String,
     reserved: Boolean,
     numPlayers: Number,
-    reservedBy: mongodb.Schema.Types.Mixed,
-    players: [mongodb.Schema.Types.Mixed]
+    reservedBy: String,
+    players: [String]
   }]
 });
 

@@ -120,9 +120,8 @@ var bookTeeTime = function(data, callback) {
 
     for (var i = 0; i < schedule.teetimes.length; i++) {
       if (schedule.teetimes[i]._id.toString() === data.teetimeId) {
-        schedule.teetimes[i].numPlayers = 1;
         schedule.teetimes[i].reserved = true;
-        schedule.teetimes[i].reservedBy = data.user;
+        schedule.teetimes[i].reservedBy = data.userId;
 
         schedule.save(function(error, data){
           if (error) {
