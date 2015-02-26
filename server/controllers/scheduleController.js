@@ -15,7 +15,7 @@ var makeSchedule = function(start, end, minutes) {
       time: start,
       reserved: false,
       reservedBy: null,
-      numPlayers: 0,
+      numPlayers: 4,
       players: []
     });
     start = nextTime(start, minutes);
