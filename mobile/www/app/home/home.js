@@ -27,8 +27,14 @@ angular.module('app.home', [])
  
         var infowindow = new google.maps.InfoWindow();
 
+        var bounds = new google.maps.LatLngBounds();
+
+
         navigator.geolocation.getCurrentPosition(function(pos) {
+            console.log("bounds : ", bounds);
+
             map.setCenter(new google.maps.LatLng(pos.coords.latitude, pos.coords.longitude));
+
             var myLocation = new google.maps.Marker({
                 position: new google.maps.LatLng(pos.coords.latitude, pos.coords.longitude),
                 map: map,
@@ -41,13 +47,13 @@ angular.module('app.home', [])
             // name, description, location, address
             var coursesTriplet = [
               {
-                name: "Hilton SF",
-                description: "Wafflez",
+                name: "The Chancellor",
+                description: "I have no weaknesses.",
                 location: [37.788309, -122.410709]
               },
               {
-                name: "Crazy Cat Lady",
-                description: "Herp",
+                name: "The Garz",
+                description: "The Garz",
                 location: [37.784069, -122.407974]
               },
               {
@@ -65,10 +71,20 @@ angular.module('app.home', [])
                   icon: "http://maps.google.com/mapfiles/ms/icons/green-dot.png",
                   title: coursesTriplet[i].name
               });            
+
+              google.maps.event.addListener(newPoint, 'click', (function(marker, i) {
+                return function() {
+                  infowindow.setContent(coursesTriplet[i].name +" : " + coursesTriplet[i].description);
+                  infowindow.open(map, marker);
+                }
+              })(newPoint, i));
+
+              bounds.extend(newPoint.position);
+
               mapPoints.push(newPoint);
             }
+            map.fitBounds(bounds);
         });
- 
         $scope.map = map;
     });
  
