@@ -32,18 +32,49 @@ angular.module('app.home', [])
                 map: map,
                 title: "My Location"
             });
-            // 37.784069, -122.407974
-            var Location1 = new google.maps.Marker({
-                position: new google.maps.LatLng(37.784069, -122.407974),
-                map: map,
-                title: "Marker1"
-            });
-            // 37.782289, -122.410742
-            var Location2 = new google.maps.Marker({
-                position: new google.maps.LatLng(37.782289, -122.410742),
-                map: map,
-                title: "Marker2"
-            });
+
+            // "Locations Array, formatted from http request";
+            // 
+            // name, description, location, address
+            var coursesTriplet = [
+              {
+                name: "Hilton SF",
+                description: "Wafflez",
+                location: [37.788309, -122.410709]
+              },
+              {
+                name: "Crazy Cat Lady",
+                description: "Herp",
+                location: [37.784069, -122.407974]
+              },
+              {
+                name: "Karim",
+                description: "DON'T BE A BABY :)",
+                location: [37.782289, -122.410742] 
+              }
+            ];
+
+            var mapPoints = [];
+            for (var i = 0; i < coursesTriplet.length; i++){
+              var newPoint = new google.maps.Marker({
+                  position: new google.maps.LatLng(coursesTriplet[i].location[0], coursesTriplet[i].location[1]),
+                  map: map,
+                  title: coursesTriplet[i].name
+              });            
+              mapPoints.push(newPoint);
+            }
+            // // 37.784069, -122.407974
+            // var Location1 = new google.maps.Marker({
+            //     position: new google.maps.LatLng(37.784069, -122.407974),
+            //     map: map,
+            //     title: "Marker1"
+            // });
+            // // 37.782289, -122.410742
+            // var Location2 = new google.maps.Marker({
+            //     position: new google.maps.LatLng(37.782289, -122.410742),
+            //     map: map,
+            //     title: "Marker2"
+            // });
 
         });
  
