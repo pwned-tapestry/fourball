@@ -10,6 +10,15 @@ angular.module('app.invite', [])
         controller: 'InviteIndexCtrl as vm'
       }
     }
+  })
+  .state('tab.inviteBlank', {
+    url: '/invite',
+    views: {
+      'invite-tab': {
+        templateUrl: 'app/invite/invite.html',
+        controller: 'InviteIndexCtrl'
+      }
+    }
   });
 })
 
@@ -28,4 +37,6 @@ angular.module('app.invite', [])
     };
     CourseService.bookTime(userInfo, teeTimeId);
   }
+
+  var pulledContacts = [];
 });
