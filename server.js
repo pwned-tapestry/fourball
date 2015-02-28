@@ -24,4 +24,5 @@ app.use('/api/schedule', scheduleRouter);
 // delete before deployment - seeds database tables (collections)
 app.use('/api/seed', seedRouter);
 
-app.listen(1337);
+var port = process.env.PORT || 8080;
+app.listen(port);
