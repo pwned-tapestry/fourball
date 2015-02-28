@@ -21,5 +21,8 @@
     "react-router": "^0.12.4",
     "twilio": "^1.10.0",
     "vinyl-source-stream": "^1.0.0"
+  },
+  "engines": {
+    "node": ">=0.10.3 <0.12"
   }
 }
