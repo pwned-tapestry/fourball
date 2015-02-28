@@ -67,8 +67,19 @@ coreRouter
         response.json(back);
       });
     });
+  })
+  .put('/teetimes/:teetimeId/:cell', function(request, response){
+    console.log("request", request.params);
+    scheduleController.addPlayerToTeeTime(request.params, function(error, result){
+      if (error) {
+        console.log("error", error);
+        return response.status(500).end(error);
+      }
+      console.log("Success 201");
+      return response.status(201).json(result);
+      // return response.location("courseInput/confirm.html");
+    });
   });
-
 
 
 var asyncMap = function (tasks, callback) {

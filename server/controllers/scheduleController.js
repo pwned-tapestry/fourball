@@ -150,10 +150,39 @@ var bookTeeTime = function(data, callback) {
   //});
 };
 
+var addPlayerToTeeTime = function(data, callback) {
+  console.log("data input to addPlayeToTeeTime:", data);
+  Schedule.findOne({ "teetimes._id": data.teetimeId }, function(error, schedule){
+    if (error) {
+      return callback && callback(error, null);
+    }
+    if (schedule == null) {
+      return callback && callback("Tee time not found", null);
+    }
+
+    for (var i = 0; i < schedule.teetimes.length; i++) {
+      if (schedule.teetimes[i]._id.toString() === data.teetimeId) {
+        schedule.teetimes[i].players.push(data.cell);
+
+        schedule.save(function(error, data){
+          if (error) {
+            console.log(error);
+            return callback && callback(error, null);
+          }
+          console.log("Player saved to teetime", data);
+          return callback && callback(null, data);
+
+        });
+      }
+    }
+  });
+};
+
 module.exports = {
   addSchedule: addSchedule,
   findSchedule: findSchedule,
   findSchedules: findSchedules,
   hasTeeTime: hasTeeTime,
-  bookTeeTime: bookTeeTime
+  bookTeeTime: bookTeeTime,
+  addPlayerToTeeTime: addPlayerToTeeTime
 };
