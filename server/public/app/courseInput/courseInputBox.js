@@ -2,6 +2,40 @@ var React = require('react');
 var Bootstrap = require('react-bootstrap');
 
 var Alert = Bootstrap.Alert;
+var Label = Bootstrap.Label;
+
+
+var TeeTime = React.createClass({
+  render: function() {
+    console.log(this.props.reservedBy,this.props.players)
+    return (
+      <div className="teeTime">
+        <h1>
+          {this.props.time} <Label bsStyle="success">{this.props.reserved}</Label>
+        </h1>
+      </div>
+    );
+  }
+});
+
+var TeeTimes = React.createClass({
+  render: function() {
+    var teeTimeNodes = this.props.data.map(function(teeTime){
+      return (
+        <TeeTime time={teeTime.time} reserved={teeTime.reservedBy} players={teeTime.players}>
+        {teeTime.players}
+        </TeeTime>
+      );
+    });
+    return (
+      <div className="teeTimeList">
+      {teeTimeNodes}
+      </div>
+    );
+  }
+});
+
+
 
 var Course = React.createClass({
   render: function() {
@@ -12,11 +46,7 @@ var Course = React.createClass({
       {this.props.name}
       </Alert>
 
-      <h3 className="courseAddress">
-      {this.props.address}
-      </h3>
 
-      {this.props.children}
       </div>
     );
   }
@@ -89,7 +119,7 @@ var CourseBox = React.createClass({
 
   loadCoursesFromServer: function() {
     $.ajax({
-      url: "/api/course/",
+      url: "/api/course",
       dataType: 'json',
       success: function(data){
         console.log(data)
@@ -98,9 +128,27 @@ var CourseBox = React.createClass({
       }.bind(this), //why bind this?
       //Must be a react thing to set the context of the callback
       error: function(xhr, status, err){
-        console.error("localhost:8080/api/coursesWithTeeTimes", status, err.toString());
+        console.error("localhost:1337/api/course", status, err.toString());
       }.bind(this)
     });
+  },
+
+  loadTeeTimesFromServer: function(){
+    $.ajax({
+      url: "/api/schedule/54efbabe15b76add275447b1/03012015",
+      dataType: 'json',
+
+      success: function(data){
+        console.log("Success! data", data.teetimes);
+        this.setState({teeTimes : data.teetimes})
+        console.log("Tee times!", this.state.teeTimes)
+      }.bind(this),
+
+      error: function(xhr, status, err){
+        console.error("localhost:1337/api/course/:id/:date", status, err.toString())
+      }.bind(this)
+    })
+
   },
 
 
@@ -127,18 +175,31 @@ var CourseBox = React.createClass({
   },
 
   getInitialState: function(){
-    return {data: []}
+    return {data: [], teeTimes: []}
   },
+
+  //TODO:
+  //write a handle route function?
+  //Get the course data
+  //Somehow bind the course ids to the data
+  //So that the course ID can be used to make an api request
+  //To get tee times.
 
   componentDidMount: function(){
     this.loadCoursesFromServer();
+    this.loadTeeTimesFromServer();
+
+    console.log("mount", this.state)
+
     setInterval(this.loadCoursesFromServer, this.props.pollInterval)
   },
 
   render: function(){
+    console.log("render!!! ", this.state.teeTimes)
     return(
       <div className="courseBox">
-      <h1>Open your course for a 4Ball</h1>
+      <h1>Current Tee Times</h1>
+      <TeeTimes data={this.state.teeTimes}/>
       <CourseList data={this.state.data}/>
       <CourseForm onCourseSubmit={this.handleCourseSubmit} />
       </div>
@@ -147,7 +208,6 @@ var CourseBox = React.createClass({
 });
 
 React.render(
-
   <CourseBox url="api/course/" pollInterval={20000} />,
   document.getElementById('content')
 );
