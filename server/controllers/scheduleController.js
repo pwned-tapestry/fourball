@@ -151,7 +151,6 @@ var bookTeeTime = function(data, callback) {
 };
 
 var addPlayerToTeeTime = function(data, callback) {
-  console.log("data input to addPlayeToTeeTime:", data);
   Schedule.findOne({ "teetimes._id": data.teetimeId }, function(error, schedule){
     if (error) {
       return callback && callback(error, null);
@@ -169,7 +168,6 @@ var addPlayerToTeeTime = function(data, callback) {
             console.log(error);
             return callback && callback(error, null);
           }
-          console.log("Player saved to teetime", data);
           return callback && callback(null, data);
 
         });
