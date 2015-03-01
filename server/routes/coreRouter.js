@@ -7,7 +7,7 @@ var express = require('express');
 var coreRouter = express.Router();
 var courseController = require('../controllers/courseController');
 var scheduleController = require('../controllers/scheduleController');
-
+var telephonyController = require('../controllers/telephonyController');
 
 coreRouter
   .post('/bookteetime', function(request, response){
@@ -78,6 +78,12 @@ coreRouter
       //also sends result back to client
       return response.redirect(301, "/courseInput/confirm.html");
     });
+  })
+  // /:teetimeId/:cell
+  .post('/inviteLinks', function(request,response){
+    console.log("request.params", request.body);
+    telephonyController.sendInviteLinks(request.body);
+    response.send("Invite links sent to friends by Twillio.");
   });
 
 var asyncMap = function (tasks, callback) {
