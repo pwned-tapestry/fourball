@@ -30,4 +30,17 @@ telephony.sendMessage = function(data){
   });
 }
 
+telephony.sendInviteLinks = function(data) {
+  console.log("sendInviteLinks called with data:", data);
+  var msgContent = "Wayne has invited you to play golf! Click on this link to confirm: \
+  http://10.6.32.201:1337/api/teetimes/54efbac915b76add27544890/2134441061"
+  client.messages.create({to: '+1'+data.cells[0], from: fromNum, body: msgContent}, function(err, message) {
+    if (err) {
+      console.log(err);
+    } else {
+      console.log(message.sid);
+    }
+  });
+};
+
 module.exports = telephony;
