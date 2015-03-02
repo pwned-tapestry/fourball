@@ -28,7 +28,7 @@ var TeeTimes = React.createClass({
       );
     });
     return (
-      <div className="teeTimeList">
+      <div className="teeTimeList Detail">
       {teeTimeNodes}
       </div>
     );
@@ -64,13 +64,16 @@ var CourseList = React.createClass({
 
     });
     return (
-      <div className="courseList">
+      <div className="courseList Master">
       {courseNodes}
       </div>
     );
   }
 });
 
+
+//Not used
+// <CourseForm onCourseSubmit={this.handleCourseSubmit} />
 
 var CourseForm = React.createClass({
   handleSubmit: function(e){
@@ -135,7 +138,7 @@ var CourseBox = React.createClass({
 
   loadTeeTimesFromServer: function(){
     $.ajax({
-      url: "/api/schedule/54efbabe15b76add275447b1/03012015",
+      url: "/api/schedule/54f4b9efe331e4ca1e261e39/03012015",
       dataType: 'json',
 
       success: function(data){
@@ -197,11 +200,9 @@ var CourseBox = React.createClass({
   render: function(){
     console.log("render!!! ", this.state.teeTimes)
     return(
-      <div className="courseBox">
-      <h1>Current Tee Times</h1>
-      <TeeTimes data={this.state.teeTimes}/>
+      <div className="courseBox" className="App">
       <CourseList data={this.state.data}/>
-      <CourseForm onCourseSubmit={this.handleCourseSubmit} />
+      <TeeTimes data={this.state.teeTimes}/>
       </div>
     );
   }

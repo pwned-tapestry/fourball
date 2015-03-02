@@ -29,7 +29,7 @@ var TeeTimes = React.createClass({displayName: "TeeTimes",
       );
     });
     return (
-      React.createElement("div", {className: "teeTimeList"}, 
+      React.createElement("div", {className: "teeTimeList Detail"}, 
       teeTimeNodes
       )
     );
@@ -65,13 +65,16 @@ var CourseList = React.createClass({displayName: "CourseList",
 
     });
     return (
-      React.createElement("div", {className: "courseList"}, 
+      React.createElement("div", {className: "courseList Master"}, 
       courseNodes
       )
     );
   }
 });
 
+
+//Not used
+// <CourseForm onCourseSubmit={this.handleCourseSubmit} />
 
 var CourseForm = React.createClass({displayName: "CourseForm",
   handleSubmit: function(e){
@@ -136,7 +139,7 @@ var CourseBox = React.createClass({displayName: "CourseBox",
 
   loadTeeTimesFromServer: function(){
     $.ajax({
-      url: "/api/schedule/54efbabe15b76add275447b1/03012015",
+      url: "/api/schedule/54f4b9efe331e4ca1e261e39/03012015",
       dataType: 'json',
 
       success: function(data){
@@ -198,11 +201,9 @@ var CourseBox = React.createClass({displayName: "CourseBox",
   render: function(){
     console.log("render!!! ", this.state.teeTimes)
     return(
-      React.createElement("div", {className: "courseBox"}, 
-      React.createElement("h1", null, "Current Tee Times"), 
-      React.createElement(TeeTimes, {data: this.state.teeTimes}), 
+      React.createElement("div", {className: "courseBox", className: "App"}, 
       React.createElement(CourseList, {data: this.state.data}), 
-      React.createElement(CourseForm, {onCourseSubmit: this.handleCourseSubmit})
+      React.createElement(TeeTimes, {data: this.state.teeTimes})
       )
     );
   }
