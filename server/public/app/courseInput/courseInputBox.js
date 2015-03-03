@@ -1,5 +1,11 @@
 var React = require('react');
 var Bootstrap = require('react-bootstrap');
+var Router = require('react-router');
+
+var Route = Router.Route;
+var DefaultRoute = Router.DefaultRoute;
+var RouteHandler = Router.RouteHandler;
+var Link = Router.Link;
 
 var Alert = Bootstrap.Alert;
 var Label = Bootstrap.Label;
@@ -194,7 +200,7 @@ var CourseBox = React.createClass({
 
     console.log("mount", this.state)
 
-    setInterval(this.loadCoursesFromServer, this.props.pollInterval)
+    setInterval(this.loadCoursesFromServer, 20000)
   },
 
   render: function(){
@@ -208,7 +214,16 @@ var CourseBox = React.createClass({
   }
 });
 
-React.render(
-  <CourseBox url="api/course/" pollInterval={20000} />,
-  document.getElementById('content')
-);
+var routes = (
+  <Route handler={CourseBox}>
+  </Route>
+)
+
+Router.run(routes, function(Handler){
+  React.render(<Handler/>, document.getElementById('content'))
+})
+
+// React.render(
+//   <CourseBox url="api/course/" pollInterval={20000} />,
+//   document.getElementById('content')
+// );
