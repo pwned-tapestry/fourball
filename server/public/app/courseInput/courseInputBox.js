@@ -165,7 +165,7 @@ var CourseBox = React.createClass({
       }.bind(this), //why bind this?
       //Must be a react thing to set the context of the callback
       error: function(xhr, status, err){
-        console.error("localhost:1337/api/course", status, err.toString());
+        console.error("http://fourball.herokuapp.com/api/course", status, err.toString());
       }.bind(this)
     });
   },
@@ -182,7 +182,7 @@ var CourseBox = React.createClass({
       }.bind(this), //why bind this?
       //Must be a react thing to set the context of the callback
       error: function(xhr, status, err){
-        console.error("localhost:1337/api/schedule/54f4b9efe331e4ca1e261e39/03012015", status, err.toString());
+        console.error("http://fourball.herokuapp.com/api/schedule/54f4b9efe331e4ca1e261e39/03012015", status, err.toString());
       }.bind(this)
     });
   },
@@ -203,7 +203,7 @@ var CourseBox = React.createClass({
         this.setState({data: data})
       }.bind(this),
       error: function(xhr, status, err){
-        console.error("localhost:8080/api/course/", status, err.toString())
+        console.error("http://fourball.herokuapp.com/api/course/", status, err.toString())
       }.bind(this)
     });
   },
