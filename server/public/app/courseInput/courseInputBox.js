@@ -27,7 +27,6 @@ var TeeTime = React.createClass({
       <div className="teeTime">
         <h1>
         {this.props.time}
-          //Uses react-bootstrap for styling
           <Label bsStyle="success">{this.props.reserved}</Label>
           <Label bsStyle="info">{this.props.players[0]}</Label>
           <Label bsStyle="info">{this.props.players[1]}</Label>
