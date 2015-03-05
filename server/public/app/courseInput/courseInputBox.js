@@ -53,7 +53,7 @@ var Course = React.createClass({
     return (
       <div className="course">
 
-      <Alert bstyle="warning">
+      <Alert bstyle="warning" onClick={this.props.onClick}>
       {this.props.name}
       </Alert>
 
@@ -178,6 +178,11 @@ var CourseBox = React.createClass({
     });
   },
 
+  handleClick: function(){
+    console.log("clicked");
+    this.loadTeeTimesFromServer();
+  },
+
   handleCourseSubmit: function(course){
     //before the ajax request
     //lets just render the course
@@ -238,7 +243,7 @@ var CourseBox = React.createClass({
 
 var routes = (
   <Route handler={CourseBox}>
-    <Route name="course" path="/api/schedule/:id/03012015" handler={CourseBox}/>
+  <Route name="course" path="/api/schedule/:id/03012015" onClick={this.handleClick} handler={CourseBox} />
   </Route>
 )
 
