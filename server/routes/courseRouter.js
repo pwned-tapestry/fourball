@@ -7,9 +7,22 @@ var express = require('express');
 var courseRouter = express.Router();
 var courseController = require('../controllers/courseController');
 
+//Post to sortedCourses, requires a request body with the following data:
+//Working supertest example:
+// var requestData = {
+//   miles: 15,
+//   limit: 3,
+//   coordinates: [37.783707, -122.408978]
+// }
+// superagent.post("foreball.azurewebsites.net/api/course/sortedCourses")
+//   .send(requestData)
+//   .end(function(err, results){
 courseRouter
-  .get('/sortedCourses', function(request, response){
+  .post('/sortedCourses', function(request, response){
     console.log('inside SortedCourses');
+    if (!request.body){
+      return response.end(new Error("Error : No request.body."));
+    }
     courseController.findCourseWithinMiles(request.body, function(error, courses){
       if (error){
         return response.end(error);
@@ -18,6 +31,7 @@ courseRouter
     });
 
   })
+//Adding an additional course, with params.
   .post('/', function(request, response){
     // TODO: Error checking in course PUT
     courseController.addCourse(request.body, function(error, course){
