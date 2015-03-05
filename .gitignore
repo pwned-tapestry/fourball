@@ -12,6 +12,8 @@ mobile/hooks
 mobile/platforms
 mobile/plugins
 
+mobile/www/css
+
 test/node_modules
 test/npm-debug.log
 
