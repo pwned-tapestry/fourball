@@ -19,7 +19,12 @@ var TeeTime = React.createClass({
     return (
       <div className="teeTime">
       <h1>
-      {this.props.time} <Label bsStyle="success">{this.props.reserved}</Label>
+      {this.props.time}
+      <Label bsStyle="success">{this.props.reserved}</Label>
+      <Label bsStyle="info">{this.props.players[0]}</Label>
+      <Label bsStyle="info">{this.props.players[1]}</Label>
+      <Label bsStyle="info">{this.props.players[2]}</Label>
+      <Label bsStyle="info">{this.props.players[3]}</Label>
       </h1>
       </div>
     );
@@ -53,7 +58,7 @@ var Course = React.createClass({
     return (
       <div className="course">
 
-      <Alert bstyle="warning" onClick={this.props.onClick}>
+      <Alert bstyle="warning">
       {this.props.name}
       </Alert>
 
@@ -179,7 +184,6 @@ var CourseBox = React.createClass({
   },
 
   handleClick: function(){
-    console.log("clicked");
     this.loadTeeTimesFromServer();
   },
 
@@ -243,7 +247,7 @@ var CourseBox = React.createClass({
 
 var routes = (
   <Route handler={CourseBox}>
-  <Route name="course" path="/api/schedule/:id/03012015" onClick={this.handleClick} handler={CourseBox} />
+    <Route name="course" path="/api/schedule/:id/03012015" handler={CourseBox} />
   </Route>
 )
 

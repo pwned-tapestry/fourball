@@ -20,7 +20,12 @@ var TeeTime = React.createClass({displayName: "TeeTime",
     return (
       React.createElement("div", {className: "teeTime"}, 
       React.createElement("h1", null, 
-      this.props.time, " ", React.createElement(Label, {bsStyle: "success"}, this.props.reserved)
+      this.props.time, 
+      React.createElement(Label, {bsStyle: "success"}, this.props.reserved), 
+      React.createElement(Label, {bsStyle: "info"}, this.props.players[0]), 
+      React.createElement(Label, {bsStyle: "info"}, this.props.players[1]), 
+      React.createElement(Label, {bsStyle: "info"}, this.props.players[2]), 
+      React.createElement(Label, {bsStyle: "info"}, this.props.players[3])
       )
       )
     );
@@ -54,7 +59,7 @@ var Course = React.createClass({displayName: "Course",
     return (
       React.createElement("div", {className: "course"}, 
 
-      React.createElement(Alert, {bstyle: "warning", onClick: this.props.onClick}, 
+      React.createElement(Alert, {bstyle: "warning"}, 
       this.props.name
       )
 
@@ -180,7 +185,6 @@ var CourseBox = React.createClass({displayName: "CourseBox",
   },
 
   handleClick: function(){
-    console.log("clicked");
     this.loadTeeTimesFromServer();
   },
 
@@ -244,7 +248,7 @@ var CourseBox = React.createClass({displayName: "CourseBox",
 
 var routes = (
   React.createElement(Route, {handler: CourseBox}, 
-  React.createElement(Route, {name: "course", path: "/api/schedule/:id/03012015", onClick: this.handleClick, handler: CourseBox})
+    React.createElement(Route, {name: "course", path: "/api/schedule/:id/03012015", handler: CourseBox})
   )
 )
 
