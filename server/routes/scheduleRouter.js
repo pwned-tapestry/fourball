@@ -2,7 +2,6 @@
  * Created by wayne on 2/16/15.
  */
 
-
 var express = require('express');
 var scheduleRouter = express.Router();
 var scheduleController = require('../controllers/scheduleController');
@@ -62,10 +61,6 @@ scheduleRouter
   })
   .post('/bookTeeTime', function(request,response){
     telephonyController.sendMessage(request.body);
-
-    //courseController.update(
-    //  schedule[]
-    //)
     response.send("Twillio confirmation message sent.");
   });
 

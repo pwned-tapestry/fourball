@@ -2,7 +2,6 @@
  * Created by wayne on 2/16/15.
  */
 
-
 var express = require('express');
 var coreRouter = express.Router();
 var courseController = require('../controllers/courseController');
@@ -91,7 +90,6 @@ var asyncMap = function (tasks, callback) {
   var totalResults = 0;
 
   for (var i = 0; i < tasks.length; i++) {
-
     (function (taskNumber) {
       tasks[taskNumber](function(result) {
         results[taskNumber] = result;
@@ -102,6 +100,5 @@ var asyncMap = function (tasks, callback) {
     })(i);
   }
 };
-
 
 module.exports = coreRouter;
