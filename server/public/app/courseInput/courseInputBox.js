@@ -1,102 +1,114 @@
+//Import npm modules because we're using browserify to build the app
 var React = require('react');
 var Bootstrap = require('react-bootstrap');
 var Router = require('react-router');
 var parse = require('url-parse');
 
 
+//Create aliases for react-router module components
 var Route = Router.Route;
 var DefaultRoute = Router.DefaultRoute;
 var RouteHandler = Router.RouteHandler;
 var Link = Router.Link;
 
+
+//Create aliases for react-bootstrap module components
 var Alert = Bootstrap.Alert;
 var Label = Bootstrap.Label;
 
 
+//TeeTime is the lowest level child of the detail view
+//Renders each tee time, main phone number reserved, and confirmed friends
+
 var TeeTime = React.createClass({
+
   render: function() {
-    //console.log("check",this.props.reservedBy,this.props.players)
     return (
       <div className="teeTime">
-      <h1>
-      {this.props.time}
-      <Label bsStyle="success">{this.props.reserved}</Label>
-      <Label bsStyle="info">{this.props.players[0]}</Label>
-      <Label bsStyle="info">{this.props.players[1]}</Label>
-      <Label bsStyle="info">{this.props.players[2]}</Label>
-      <Label bsStyle="info">{this.props.players[3]}</Label>
-      </h1>
+        <h1>
+        {this.props.time}
+          //Uses react-bootstrap for styling
+          <Label bsStyle="success">{this.props.reserved}</Label>
+          <Label bsStyle="info">{this.props.players[0]}</Label>
+          <Label bsStyle="info">{this.props.players[1]}</Label>
+          <Label bsStyle="info">{this.props.players[2]}</Label>
+          <Label bsStyle="info">{this.props.players[3]}</Label>
+        </h1>
       </div>
     );
   }
+
 });
 
+
+//TeeTimes is the parent class to TeeTime
+//Renders a tee time class for every teeTime on the server
 var TeeTimes = React.createClass({
 
   render: function() {
-
     var teeTimeNodes = this.props.teeTimes.map(function(teeTime){
       return (
         <TeeTime time={teeTime.time} reserved={teeTime.reservedBy} players={teeTime.players}>
-        {teeTime.players}
+          {teeTime.players}
         </TeeTime>
       );
     });
     return (
       <div className="teeTimeList Detail">
-      {teeTimeNodes}
+        {teeTimeNodes}
       </div>
     );
   }
+
 });
 
 
-
+//Course is the lowest level child of the master
+//Renders each course on the left side of the page
 var Course = React.createClass({
 
   render: function() {
     return (
       <div className="course">
-
-      <Alert bstyle="warning">
-      {this.props.name}
-      </Alert>
-
-
+        <Alert bstyle="warning">
+          {this.props.name}
+        </Alert>
       </div>
     );
   }
+
 });
 
 
+//CourseList is the parent class to Course
+//Renders a course for every course on the server
+//Each course is rendered as a Link, from the react-router
 var CourseList = React.createClass({
-  handleClick: function() {
-    console.log("link clicked");
-  },
 
   render: function(){
     var courseNodes = this.props.data.map(function(course){
       return (
         <Link to="course" params={{ id: course._id }} >
-        <Course name={course.name} address={course.address}>
-        {course.description}
-        </Course>
+          <Course name={course.name} address={course.address}>
+            {course.description}
+          </Course>
         </Link>
       );
 
     });
     return (
       <div className="courseList Master">
-      {courseNodes}
+        {courseNodes}
       </div>
     );
   }
+
 });
 
 
-//Not used
-// <CourseForm onCourseSubmit={this.handleCourseSubmit} />
-
+//Course form is a react input field for updating the server
+//This was for prototype purposes, and scope changed
+//Not used, but available for future
 var CourseForm = React.createClass({
   handleSubmit: function(e){
     e.preventDefault();
@@ -134,24 +146,22 @@ var CourseForm = React.createClass({
   }
 });
 
-//api/course/
-//
+
+//CourseBox is the parent class for all submodules
 //
 
 var CourseBox = React.createClass({
-
 
   getInitialState: function(){
     return {data: [], teeTimes: []}
   },
 
+  //HTTP requests to the api for courses
   loadCoursesFromServer: function() {
     $.ajax({
       url: "/api/course",
       dataType: 'json',
       success: function(data){
-        //console.log("successful course load from server", data)
-
         this.setState({data: data});
       }.bind(this), //why bind this?
       //Must be a react thing to set the context of the callback
@@ -161,19 +171,14 @@ var CourseBox = React.createClass({
     });
   },
 
+  //HTTP requests to the api for courses
   loadTeeTimesFromServer: function() {
-    //console.log("loading Tee Times", document.URL, parse(document.URL).hash);
-    //console.log("path",  parse(document.URL).hash.slice(1) );
-
     var newQuery = parse(document.URL).hash.slice(1);
 
     $.ajax({
       url: newQuery,
       dataType: 'json',
       success: function(data){
-        //console.log("load tee times from server", data);
-        //console.log("check the teetimes property", data.teetimes);
-
         this.setState({teeTimes: data.teetimes});
       }.bind(this), //why bind this?
       //Must be a react thing to set the context of the callback
@@ -183,13 +188,8 @@ var CourseBox = React.createClass({
     });
   },
 
-  handleClick: function(){
-    this.loadTeeTimesFromServer();
-  },
-
+  //Not used. Handles new course submission
   handleCourseSubmit: function(course){
-    //before the ajax request
-    //lets just render the course
     var courses = this.state.data;
     var newCourse = courses.concat([course]);
     this.setState({data: newCourse});
@@ -209,33 +209,16 @@ var CourseBox = React.createClass({
     });
   },
 
-
-  //TODO:
-  //write a handle route function?
-  //Get the course data
-  //Somehow bind the course ids to the data
-  //So that the course ID can be used to make an api request
-  //To get tee times.
-
-  componentWillMount: function(){
-    console.log("will mount", this);
-  },
-
-
+  //Initial HTTP requests on load
   componentDidMount: function(){
     this.loadCoursesFromServer();
     this.loadTeeTimesFromServer();
-
-    //console.log("did mount", this.state)
-
-    //setInterval(this.loadCoursesFromServer, 20000)
+    //Sets up server polling for teeTimes
     setInterval(this.loadTeeTimesFromServer, 1000)
   },
 
+  //Renders CourseList and TeeTimes
   render: function(){
-
-    //console.log("render!!! ", this.state.teeTimes)
-
     return(
       <div className="courseBox" className="App">
       <CourseList data={this.state.data}/>
@@ -245,17 +228,14 @@ var CourseBox = React.createClass({
   }
 });
 
+//Sets path for course links to match course ID for HTTP calls
 var routes = (
   <Route handler={CourseBox}>
     <Route name="course" path="/api/schedule/:id/03012015" handler={CourseBox} />
   </Route>
 )
 
+//Runs the router
 Router.run(routes, function(Handler){
   React.render(<Handler/>, document.getElementById('content'))
-})
-
-// React.render(
-//   <CourseBox url="api/course/" pollInterval={20000} />,
-//   document.getElementById('content')
-// );
+});
