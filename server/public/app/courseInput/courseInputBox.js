@@ -1,6 +1,8 @@
 var React = require('react');
 var Bootstrap = require('react-bootstrap');
 var Router = require('react-router');
+var parse = require('url-parse');
+
 
 var Route = Router.Route;
 var DefaultRoute = Router.DefaultRoute;
@@ -13,20 +15,22 @@ var Label = Bootstrap.Label;
 
 var TeeTime = React.createClass({
   render: function() {
-    console.log(this.props.reservedBy,this.props.players)
+    //console.log("check",this.props.reservedBy,this.props.players)
     return (
       <div className="teeTime">
-        <h1>
-          {this.props.time} <Label bsStyle="success">{this.props.reserved}</Label>
-        </h1>
+      <h1>
+      {this.props.time} <Label bsStyle="success">{this.props.reserved}</Label>
+      </h1>
       </div>
     );
   }
 });
 
 var TeeTimes = React.createClass({
+
   render: function() {
-    var teeTimeNodes = this.props.data.map(function(teeTime){
+
+    var teeTimeNodes = this.props.teeTimes.map(function(teeTime){
       return (
         <TeeTime time={teeTime.time} reserved={teeTime.reservedBy} players={teeTime.players}>
         {teeTime.players}
@@ -44,6 +48,7 @@ var TeeTimes = React.createClass({
 
 
 var Course = React.createClass({
+
   render: function() {
     return (
       <div className="course">
@@ -60,12 +65,18 @@ var Course = React.createClass({
 
 
 var CourseList = React.createClass({
+  handleClick: function() {
+    console.log("link clicked");
+  },
+
   render: function(){
     var courseNodes = this.props.data.map(function(course){
       return (
+        <Link to="course" params={{ id: course._id }} >
         <Course name={course.name} address={course.address}>
         {course.description}
         </Course>
+        </Link>
       );
 
     });
@@ -94,8 +105,6 @@ var CourseForm = React.createClass({
     if (!name ||  !address || !description) {
       return;
     }
-
-    console.log("handleSubmit Called");
 
     //on submit, we send a json object
     this.props.onCourseSubmit({name: name, address: address, description: description});
@@ -126,12 +135,17 @@ var CourseForm = React.createClass({
 
 var CourseBox = React.createClass({
 
+
+  getInitialState: function(){
+    return {data: [], teeTimes: []}
+  },
+
   loadCoursesFromServer: function() {
     $.ajax({
       url: "/api/course",
       dataType: 'json',
       success: function(data){
-        console.log(data)
+        //console.log("successful course load from server", data)
 
         this.setState({data: data});
       }.bind(this), //why bind this?
@@ -142,24 +156,27 @@ var CourseBox = React.createClass({
     });
   },
 
-  loadTeeTimesFromServer: function(){
+  loadTeeTimesFromServer: function() {
+    //console.log("loading Tee Times", document.URL, parse(document.URL).hash);
+    //console.log("path",  parse(document.URL).hash.slice(1) );
+
+    var newQuery = parse(document.URL).hash.slice(1);
+
     $.ajax({
-      url: "/api/schedule/54f4b9efe331e4ca1e261e39/03012015",
+      url: newQuery,
       dataType: 'json',
-
       success: function(data){
-        console.log("Success! data", data.teetimes);
-        this.setState({teeTimes : data.teetimes})
-        console.log("Tee times!", this.state.teeTimes)
-      }.bind(this),
+        //console.log("load tee times from server", data);
+        //console.log("check the teetimes property", data.teetimes);
 
+        this.setState({teeTimes: data.teetimes});
+      }.bind(this), //why bind this?
+      //Must be a react thing to set the context of the callback
       error: function(xhr, status, err){
-        console.error("localhost:1337/api/course/:id/:date", status, err.toString())
+        console.error("localhost:1337/api/schedule/54f4b9efe331e4ca1e261e39/03012015", status, err.toString());
       }.bind(this)
-    })
-
+    });
   },
-
 
   handleCourseSubmit: function(course){
     //before the ajax request
@@ -183,9 +200,6 @@ var CourseBox = React.createClass({
     });
   },
 
-  getInitialState: function(){
-    return {data: [], teeTimes: []}
-  },
 
   //TODO:
   //write a handle route function?
@@ -194,21 +208,29 @@ var CourseBox = React.createClass({
   //So that the course ID can be used to make an api request
   //To get tee times.
 
+  componentWillMount: function(){
+    console.log("will mount", this);
+  },
+
+
   componentDidMount: function(){
     this.loadCoursesFromServer();
     this.loadTeeTimesFromServer();
 
-    console.log("mount", this.state)
+    //console.log("did mount", this.state)
 
-    setInterval(this.loadCoursesFromServer, 20000)
+    //setInterval(this.loadCoursesFromServer, 20000)
+    setInterval(this.loadTeeTimesFromServer, 1000)
   },
 
   render: function(){
-    console.log("render!!! ", this.state.teeTimes)
+
+    //console.log("render!!! ", this.state.teeTimes)
+
     return(
       <div className="courseBox" className="App">
       <CourseList data={this.state.data}/>
-      <TeeTimes data={this.state.teeTimes}/>
+      <TeeTimes teeTimes={this.state.teeTimes}/>
       </div>
     );
   }
@@ -216,6 +238,7 @@ var CourseBox = React.createClass({
 
 var routes = (
   <Route handler={CourseBox}>
+    <Route name="course" path="/api/schedule/:id/03012015" handler={CourseBox}/>
   </Route>
 )
 

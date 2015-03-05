@@ -21,6 +21,7 @@
     "react-bootstrap": "^0.15.1",
     "react-router": "^0.12.4",
     "twilio": "^1.10.0",
+    "url-parse": "^1.0.0",
     "vinyl-source-stream": "^1.0.0"
   }
 }
