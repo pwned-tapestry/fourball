@@ -15,8 +15,12 @@ var requestData = {
 }
 
 describe("e2e: Course endpoints :", function(){
+
+  //Note that sortedCourses requires inputs that confirm to 
+  //what is specified in the controller's comments.
+  //Error checking is not complete.
   it("sends a GET to /course/sortedCourses", function(done){
-  superagent.get("http://localhost:8080/api/course/sortedCourses")
+  superagent.get("http://localhost:1337/api/course/sortedCourses")
     .send(requestData)
     .end(function(err, results){
       if (err){
