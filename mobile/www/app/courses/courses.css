@@ -1,8 +1,3 @@
-/** {
-  padding: 0;
-  margin: 0;
-}
-*/
 .scroll {
   height: 100%;
 }
@@ -11,21 +6,10 @@
   height: 100%;
 }
 
-ion-item.item.item-complex {
+.item.thirds {
   min-height: 33%;
-  max-height: 33%;
-}
-
-/*.itemHeight {
-  max-height: 280px;
-}
-*/
-.p2text {
-  padding: 0 !important;
 }
 
 .item-display {
   font-weight: bold;
 }
-
-/*padding, css style*/
