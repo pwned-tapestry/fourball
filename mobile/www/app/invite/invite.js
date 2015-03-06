@@ -28,6 +28,9 @@ angular.module('app.invite', [])
   vm.teeTime = $stateParams.teeTime;
   vm.userInfo = {}
   var teeTimeId = $stateParams.teeTimeId;
+  vm.cell_1 = "2134441061";
+  vm.cell_2 = "2132156162";
+  vm.cell_3 = "5555555555";
 
   vm.bookTime = function(){
     var userInfo = {
@@ -36,6 +39,15 @@ angular.module('app.invite', [])
       invitees    : vm.userInfo.invitees
     };
     CourseService.bookTime(userInfo, teeTimeId);
+  }
+
+  vm.sendInvites = function() {
+    var inviteInfo = {
+      teetimeId: teeTimeId,
+      cells: [vm.cell_1, vm.cell_2, vm.cell_3]
+    };
+    console.log("inviteInfo:", inviteInfo);
+    CourseService.sendInvites(inviteInfo);
   }
 
   var pulledContacts = [];

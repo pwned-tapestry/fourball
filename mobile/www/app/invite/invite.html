@@ -29,15 +29,15 @@
 
     <ul class="list">
       <label class="item item-input item-display">
-         <span class="input-label">Wayne</span><span class="input-label pull-right">555-555-5555</span>
+         <span class="input-label">John</span><span class="input-label pull-right">{{vm.cell_1}}</span>
       </label>
       <label class="item item-input item-display">
-         <span class="input-label">Philip</span><span class="input-label pull-right">555-555-5555</span>
+         <span class="input-label">Philip</span><span class="input-label pull-right">{{vm.cell_2}}</span>
       </label>
       <label class="item item-input item-display">
-         <span class="input-label">Nick</span><span class="input-label pull-right">555-555-5555</span>
+         <span class="input-label">Nick</span><span class="input-label pull-right">{{vm.cell_3}}</span>
       </label>
-      <button class="button button-positive button-block">Send Invites</button>
+      <button class="button button-positive button-block" ng-click="vm.sendInvites()">Send Invites</button>
     </ul>
 
     </div>  <!-- end class="list list-inset" -->
