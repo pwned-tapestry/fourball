@@ -2,25 +2,25 @@
 
 #To Start Working
 
-1. Fork the https://github.com/pwned-tapestry/thesis repo.
+1. Fork the https://github.com/pwned-tapestry/fourball repo.
 
 1. Clone to your local machine.
 
 1. Add upstream remote.
 
-  `$ git remote add upstream https://github.com/pwned-tapestry/thesis`
+  `$ git remote add upstream https://github.com/pwned-tapestry/fourball`
 
 1. Checkout the development branch.
 
   `git checkout development`
 
   Note: The first time you do this, you may have to check it out from your fork.
-  
+
   `git checkout -b origin/development`
 
 1. From your local development, checkout a feature_branch to develop on. Name branch after its purpose and add the issue number at the end of its name. Work on that branch.
 
-  For example: 
+  For example:
 
   `$ git checkout -b feature_api_usernames#11`
 
@@ -45,7 +45,7 @@
   `$git --rebase continue`
 
   If you need a hand with this, ask Nick.
-  
+
   At this point, your local feature branch should have the entire current upstream project, with your commits played over top of it. This will allow pull requests to be merged automatically.
 
 1. Push your local feature branch to your fork.
@@ -55,17 +55,17 @@
   `#from your feature branch`
 
   `$git push origin feature_api_usernames`
-  
-  NOTE: Everyone on our team has had an issue at this stage. It's possible, either through mistakes or confusing instructions, that git will tell you that some refs could not be pushed. And it will give you very vague instructions to 'git pull' from your fork. 
-  
+
+  NOTE: Everyone on our team has had an issue at this stage. It's possible, either through mistakes or confusing instructions, that git will tell you that some refs could not be pushed. And it will give you very vague instructions to 'git pull' from your fork.
+
   If you've successfully rebased your local repository from the upstream development branch, then your goal is to get your local repo pushed to your fork exactly as you have it on your local feature branch
-  
+
   In this case you do a:
-  
+
   `#from your feature branch`
-  
+
   `git push --force origin feature_api_usernames`
-  
+
   This will overwrite your origin repo with your local repo.
 
 1. Pull request:
@@ -92,7 +92,7 @@
 
 #References
 For reference:
-Replace `master` with `development` and `hackreactor:repo` with `pwned-tapestry:thesis`
+Replace `master` with `development` and `hackreactor:repo` with `pwned-tapestry:fourball`
 
 ![workflowImage](http://i.imgur.com/p0e4tQK.png)
 
