@@ -26,7 +26,6 @@ function CourseService($http, $q) {
   }
 
   function get(courseId) {
-
     return this._courses.filter(function(elem) {
       return elem._id === courseId;
     })[0];
@@ -38,12 +37,13 @@ function CourseService($http, $q) {
       cell: userInfo.userName,
       firstName: userInfo.userNumber
     };
-
+    var deferred = $q.defer();
     //create a new user
     $http.post("http://localhost:1337/api/user", newUser)
 
     .success(function(returnedUser){
       //then send a text, to that user
+      deferred.resolve(returnedUser);
       $http.post("http://localhost:1337/api/schedule/bookTeeTime", userInfo)
         .success(function(data, status){
           console.log('success : ', data);
@@ -54,7 +54,7 @@ function CourseService($http, $q) {
       // book the teeTime -- should be combined into one api call with above post to schedule/bookTeeTime
       $http.post("http://localhost:1337/api/bookteetime",{userId: returnedUser._id, teetimeId: teeTimeId})
         .success(function(data, status, headers, config) {
-          console.log("data after post to /bookteetime", data);
+          // console.log("data after post to /bookteetime", data);
         })
         .error(function(data, status, headers, config) {
           console.log("error:", error);
@@ -62,14 +62,15 @@ function CourseService($http, $q) {
     })
     .error(function(error, status, headers, config) {
       console.log("error:", error);
+      deferred.reject();
     });
+    return deferred.promise;
   }
 
   function sendInvites(info) {
     $http.post("http://localhost:1337/api/inviteLinks", info)
-
     .success(function(data, status, headers, config) {
-      console.log("data after post to /inviteLinks", data);
+      // console.log("data after post to /inviteLinks", data);
     })
     .error(function(error, status, headers, config) {
       console.log("error:", error);
