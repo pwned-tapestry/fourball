@@ -11,7 +11,6 @@ angular.module('app', [
   'app.services',
   'app.home',
   'app.courses',
-  'app.times',
   'app.invite'
 ])
 
