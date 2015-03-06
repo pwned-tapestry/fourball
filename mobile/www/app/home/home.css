@@ -1,20 +1,22 @@
-.round-button{
+.round-button {
   width: 200px;
   height: 200px;
   border-radius: 200px;
 }
+
 .viewPortCenter {
   margin: auto;
   top: 25%;
 }
-.absoluteCenter{
+
+.absoluteCenter {
   text-align: center;
   line-height: 300%;
   font-family: Garamond;
   font-size: 64px;
 }
- 
+
 #map {
-    width: 100%;
-    height: 100%;
+  width: 100%;
+  height: 100%;
 }

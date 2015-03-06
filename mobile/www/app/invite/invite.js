@@ -41,7 +41,6 @@ angular.module('app.invite', [])
     };
     CourseService.bookTime(userInfo, teeTimeId)
     .then(function(data) {
-      console.log("data after bookTime:", data);
       vm.isDisabled = false;
     });
   }
