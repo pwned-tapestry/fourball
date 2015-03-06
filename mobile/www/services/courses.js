@@ -65,9 +65,21 @@ function CourseService($http, $q) {
     });
   }
 
+  function sendInvites(info) {
+    $http.post("http://localhost:1337/api/inviteLinks", info)
+
+    .success(function(data, status, headers, config) {
+      console.log("data after post to /inviteLinks", data);
+    })
+    .error(function(error, status, headers, config) {
+      console.log("error:", error);
+    });
+  }
+
   return {
       getCoursesWithTeeTimes: getCoursesWithTeeTimes,
       get: get,
-      bookTime: bookTime
+      bookTime: bookTime,
+      sendInvites: sendInvites
   };
 };
