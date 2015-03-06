@@ -49,7 +49,7 @@ ionic serve
 
 ## The Stack
 
-
+![stackImage](http://i.imgur.com/o1QVjhN.jpg?1)
 
 ## Contributing
 
