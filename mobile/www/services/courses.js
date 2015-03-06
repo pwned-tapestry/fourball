@@ -11,9 +11,9 @@ function CourseService($http, $q) {
     $http.get("http://localhost:1337/api/coursesWithTeeTimes")
       .success(function(data, status) {
         that._courses = data;
-        that._courses[0].url = '../img/golf_1.jpg';
-        that._courses[1].url = '../img/golf_2.jpg';
-        that._courses[2].url = '../img/golf_2.jpg';
+        that._courses[0].url = '../img/golf_4.jpg';
+        that._courses[1].url = '../img/golf_5.jpg';
+        that._courses[2].url = '../img/golf_6.jpg';
         deferred.resolve(data);
       })
       .error(function(data, status) {
