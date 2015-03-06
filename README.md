@@ -30,7 +30,7 @@ ionic serve
 ```
 
 1. Google maps set up for ionic apps. See [this blog](https://blog.nraboy.com/2014/10/implement-google-maps-using-ionicframework/) for how to set it up.
-1. Your own config.js file with your Twilio and Mongolabs API keys. See [server/SAMPLEconfig.js](https://github.com/pwned-tapestry/fourball/blob/development/server/SAMPLEconig.js)
+1. Your own config.js file with your Twilio and Mongolabs API keys. See [server/SAMPLEconfig.js](https://github.com/nsipplswezey/fourball/blob/development/server/SAMPLEconfig.js)
 1. MongoDB.
 
 ### Installing Dependencies and Getting Up and Running
