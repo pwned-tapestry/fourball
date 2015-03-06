@@ -374,7 +374,7 @@ body {
 
 #dev-card {
     float: left;
-    width: 30%;
+    width: 25%;
     height: auto;
     display: inherit;
     text-align: center;
@@ -385,7 +385,12 @@ body {
 
 #dev-pic {
     float: left;
-    width: 100%;
+    width: 20%;
     border-radius: 2000px;
     border-radius: 2px solid black;
+}
+
+.float-left {
+float:left;
+width:20%; // or 33% for equal width independent of parent width
 }
