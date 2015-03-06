@@ -28,14 +28,29 @@ angular.module('app.invite', [])
   vm.teeTime = $stateParams.teeTime;
   vm.userInfo = {}
   var teeTimeId = $stateParams.teeTimeId;
-
+  vm.cell_1 = "2134441061";
+  vm.cell_2 = "2132156162";
+  vm.cell_3 = "5555555555";
+  vm.isDisabled = true;
+  vm.isHidden = true;
   vm.bookTime = function(){
     var userInfo = {
       userName    : vm.userInfo.userName,
       userNumber  : vm.userInfo.userNumber,
       invitees    : vm.userInfo.invitees
     };
-    CourseService.bookTime(userInfo, teeTimeId);
+    CourseService.bookTime(userInfo, teeTimeId)
+    .then(function(data) {
+      vm.isDisabled = false;
+    });
+  }
+
+  vm.sendInvites = function() {
+    var inviteInfo = {
+      teetimeId: teeTimeId,
+      cells: [vm.cell_1, vm.cell_2, vm.cell_3]
+    };
+    CourseService.sendInvites(inviteInfo);
   }
 
   var pulledContacts = [];

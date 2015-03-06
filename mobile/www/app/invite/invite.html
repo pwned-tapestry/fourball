@@ -11,12 +11,6 @@
         <span class="input-label">Tee Time:</span>
         <span class="input-label pull-right">{{vm.teeTime}}</span>
       </label>
-      <label class="item item-input item-display">
-        <span class="input-label">Players:</span>
-        <span class="input-label pull-right">1</span>
-      </label>
-
-      <button class="button button-positive button-block" ng-click="vm.bookTime()">Book It</button>
 
       <label class="item item-input">
         <input type="text" ng-model="vm.userInfo.userName" placeholder="First Name">
@@ -24,20 +18,21 @@
       <label class="item item-input">
         <input type="tel" ng-model="vm.userInfo.userNumber" placeholder="Mobile Number">
       </label>
+      <button class="button button-positive button-block" ng-click="vm.bookTime()">Book It</button>
 
-    <button class="button button-positive button-block">Invite Friends</button>
+      <button class="button button-positive button-block" ng-disabled="vm.isDisabled" ng-click="vm.isHidden = !vm.isHidden">Invite Friends</button>
 
     <ul class="list">
       <label class="item item-input item-display">
-         <span class="input-label">Wayne</span><span class="input-label pull-right">555-555-5555</span>
+         <span class="input-label">John</span><span class="input-label pull-right">{{vm.cell_1}}</span>
       </label>
       <label class="item item-input item-display">
-         <span class="input-label">Philip</span><span class="input-label pull-right">555-555-5555</span>
+         <span class="input-label">Philip</span><span class="input-label pull-right">{{vm.cell_2}}</span>
       </label>
       <label class="item item-input item-display">
-         <span class="input-label">Nick</span><span class="input-label pull-right">555-555-5555</span>
+         <span class="input-label">Nick</span><span class="input-label pull-right">{{vm.cell_3}}</span>
       </label>
-      <button class="button button-positive button-block">Send Invites</button>
+      <button class="button button-positive button-block" ng-click="vm.sendInvites()" ng-hide="vm.isHidden">Send Invites</button>
     </ul>
 
     </div>  <!-- end class="list list-inset" -->
