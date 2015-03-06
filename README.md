@@ -20,7 +20,7 @@ An excessively low barrier for a same day 4-ball
 
 ### Roadmap
 
-View the project roadmap [here](https://github.com/pwned-tapestry/thesis/issues).
+View the project roadmap [here](https://github.com/pwned-tapestry/fourball/issues).
 
 ## Usage
 
@@ -54,6 +54,10 @@ cd ./mobile
 npm install
 ionic serve
 ```
+
+## The Stack
+
+
 
 ## Contributing
 
