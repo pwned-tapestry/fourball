@@ -11,7 +11,7 @@ An excessively low barrier for a same day 4-ball
 
 ## Table of Contents
 
-1. [Roadmap](#tasks) 
+1. [Roadmap](#tasks)
 1. [Usage](#Usage)
 1. [Requirements](#requirements)
 1. [Installing Dependencies](#installing-dependencies)
@@ -29,22 +29,30 @@ View the project roadmap [here](https://github.com/pwned-tapestry/thesis/issues)
 1. Launch mobile app
 1. Launch database
 
-## Requirements
+## Dev Requirements
 
-1. Ionic/Cordova
-1. React
-1. Mongo/MySQL
+1. Ionic/Cordova. Make sure you can get the [demo ionic apps](http://ionicframework.com/getting-started/) up and running with
 
-## Development
+```sh
+ionic server
+```
 
-### Installing Dependencies
+1. Google maps set up for ionic apps. See [this blog](https://blog.nraboy.com/2014/10/implement-google-maps-using-ionicframework/) for how to set it up.
+1. Your own config.js file with your Twilio and Mongolabs API keys. See [server/SAMPLEconfig.js](https://github.com/pwned-tapestry/fourball/blob/development/server/SAMPLEconig.js)
+1. MongoDB.
+
+### Installing Dependencies and Getting Up and Running
 
 From within the root directory:
 
 ```sh
+cd server
 npm install
-npm install -g bower
-bower install
+node server.js
+
+cd ./mobile
+npm install
+ionic serve
 ```
 
 ## Contributing
