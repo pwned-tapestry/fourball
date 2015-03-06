@@ -1,13 +1,6 @@
-# 4-Ball
+# [Fourball](fourball.herokuapp.com)
 
-An excessively low barrier for a same day 4-ball
-
-## Team
-
-  - __Product Owner__: Wayne Müler [@wainage](https://github.com/wainage)
-  - __Scrum Master__: Nick Sippl-Swezey [@nsipplswezey](https://github.com/nsipplswezey)
-  - __Development Superhero__: Philip Rosen [@philipjrosen](https://github.com/philipjrosen)
-  - __Development Superhero__: Daniel Tsui [@sdtsui](https://github.com/sdtsui)
+Fourball is a mobile app that gets you and your friends onto the golf course as quickly as possible. It provides real time tee times at nearby golf courses and allows you to book instantly as well as notifying your friends via SMS.
 
 ## Table of Contents
 
@@ -46,7 +39,6 @@ cd ./mobile
 npm install
 ionic serve
 ```
-
 ## The Stack
 
 ![stackImage](http://i.imgur.com/o1QVjhN.jpg?1)
@@ -56,3 +48,10 @@ ionic serve
 See [CONTRIBUTING.md](CONTRIBUTING.md) for contribution guidelines.
 
 See [STYLEGUIDE.md](STYLEGUIDE.md) for the project's style manual.
+
+## Team
+
+  - __Product Owner__: Wayne Müler [@wainage](https://github.com/wainage)
+  - __Scrum Master__: Nick Sippl-Swezey [@nsipplswezey](https://github.com/nsipplswezey)
+  - __Development Superhero__: Philip Rosen [@philipjrosen](https://github.com/philipjrosen)
+  - __Development Superhero__: Daniel Tsui [@sdtsui](https://github.com/sdtsui)
