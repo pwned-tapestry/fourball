@@ -12,9 +12,8 @@ An excessively low barrier for a same day 4-ball
 ## Table of Contents
 
 1. [Roadmap](#tasks)
-1. [Usage](#Usage)
-1. [Requirements](#requirements)
-1. [Installing Dependencies](#installing-dependencies)
+1. [Requirements](#dev-requirements)
+1. [Installing Dependencies](#installing-dependencies-and-getting-up-and-running)
 1. [Team](#team)
 1. [Contributing](#contributing)
 
@@ -22,19 +21,12 @@ An excessively low barrier for a same day 4-ball
 
 View the project roadmap [here](https://github.com/pwned-tapestry/fourball/issues).
 
-## Usage
-
-1. Clone repo
-1. [Install dependencies](#installing-dependencies)
-1. Launch mobile app
-1. Launch database
-
 ## Dev Requirements
 
 1. Ionic/Cordova. Make sure you can get the [demo ionic apps](http://ionicframework.com/getting-started/) up and running with
 
 ```sh
-ionic server
+ionic serve
 ```
 
 1. Google maps set up for ionic apps. See [this blog](https://blog.nraboy.com/2014/10/implement-google-maps-using-ionicframework/) for how to set it up.
