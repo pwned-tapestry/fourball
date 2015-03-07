@@ -1,4 +1,4 @@
-# [Fourball](fourball.herokuapp.com)
+# [Fourball](http://fourball.herokuapp.com)
 
 Fourball is a mobile app that gets you and your friends onto the golf course as quickly as possible. It provides real time tee times at nearby golf courses and allows you to book instantly as well as notifying your friends via SMS.
 
