@@ -51,7 +51,7 @@ See [STYLEGUIDE.md](STYLEGUIDE.md) for the project's style manual.
 
 ## Team
 
-  - __Product Owner__: Wayne Müler [@wainage](https://github.com/wainage)
+  - __Product Owner__: Wayne Müller [@wainage](https://github.com/wainage)
   - __Scrum Master__: Nick Sippl-Swezey [@nsipplswezey](https://github.com/nsipplswezey)
   - __Development Superhero__: Philip Rosen [@philipjrosen](https://github.com/philipjrosen)
   - __Development Superhero__: Daniel Tsui [@sdtsui](https://github.com/sdtsui)
